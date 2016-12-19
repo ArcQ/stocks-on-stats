@@ -17,6 +17,9 @@ const webpackConfig = {
   devtool : project.compiler_devtool,
   resolve : {
     root       : project.paths.client(),
+    alias : {
+      "rxjs" : "rx-lite"
+    }
     extensions : ['', '.js', '.jsx', '.json']
   },
   module : {}
