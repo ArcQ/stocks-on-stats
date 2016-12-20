@@ -20,16 +20,17 @@
     "settings": {
       "import/resolver": {
         "webpack":{
-          "config": "webpack.dev.config.js"
+          "config": "config/webpack.config.js"
         }
       }
-    }
+    },
     "rules": {
       "jsx-quotes"           : [2, "prefer-single"],
       "max-len"              : [1, 100, 2],
       "import/no-named-as-default" : 0,
       "react/jsx-filename-extension" : 0,
       "no-param-reassign": ["error", { "props": false }],
-      "no-mixed-operators": 1
+      "no-mixed-operators": 1,
+      "no-underscore-dangle": 0,
     },
 }
