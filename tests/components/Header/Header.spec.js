@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from 'components/Header/Header'
+import { Header } from 'components/header/header'
 import { IndexLink, Link } from 'react-router'
 import { shallow } from 'enzyme'
 
@@ -28,7 +28,7 @@ describe('(Component) Header', () => {
     it('Should render a Link to StockCorrelation route', () => {
       expect(_wrapper.contains(
         <Link activeClassName='route--active' to='/stock-correlation'>
-          Stock-Correlation
+          Stock Correlation
         </Link>
       )).to.be.true
     })
