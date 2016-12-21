@@ -15,7 +15,7 @@ describe('(Component) StockCorrelation', () => {
         increment   : (_spies.increment = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
-    _wrapper = shallow(<Counter {..._props} />)
+    _wrapper = shallow(<StockCorrelation {..._props} />)
   })
 
   it('Should render as a <div>.', () => {
