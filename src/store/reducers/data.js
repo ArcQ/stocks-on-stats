@@ -1,7 +1,19 @@
+import { createEpicMiddleware } from 'redux-observable';
+
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const DATA_REQUEST = 'DATA_REQUEST';
+
+// ------------------------------------
+// Epics (https://github.com/redux-observable/redux-observable)
+// ------------------------------------
+export const pingEpic = action$ =>
+  action$
+    .delay(1000) // Asynchronously wait 1000ms then continue
+    .mapTo({ type: PING })
+.delay(1000) // Asynchronously wait 1000ms then continue
+    .mapTo({ type: PONG });
 
 // ------------------------------------
 // Actions
