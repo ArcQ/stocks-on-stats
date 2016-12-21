@@ -19,7 +19,7 @@ const webpackConfig = {
     root       : project.paths.client(),
     alias : {
       "rxjs" : "rx-lite"
-    }
+    },
     extensions : ['', '.js', '.jsx', '.json']
   },
   module : {}
