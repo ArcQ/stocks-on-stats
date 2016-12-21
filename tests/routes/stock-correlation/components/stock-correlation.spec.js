@@ -1,9 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { Counter } from 'routes/Counter/components/Counter'
+import { StockCorrelation } from 'routes/stock-correlation/components/stock-correlation'
 import { shallow } from 'enzyme'
 
-describe('(Component) Counter', () => {
+describe('(Component) StockCorrelation', () => {
   let _props, _spies, _wrapper
 
   beforeEach(() => {

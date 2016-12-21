@@ -1,7 +1,7 @@
 import React from 'react';
 import YqlFacade from '../../../store/reducers/yql/yql-facade.js';
 
-export const Counter = props => (
+export const StockCorrelation = props => (
   <div style={{ margin: '0 auto' }} >
     <h2>Counter: {props.counter}</h2>
     <button className='btn btn-default' onClick={props.increment}>
@@ -28,10 +28,10 @@ export const Counter = props => (
   </div>
 );
 
-Counter.propTypes = {
+StockCorrelation.propTypes = {
   counter: React.PropTypes.number.isRequired,
   doubleAsync: React.PropTypes.func.isRequired,
   increment: React.PropTypes.func.isRequired,
 };
 
-export default Counter;
+export default StockCorrelation;
