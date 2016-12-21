@@ -4,11 +4,13 @@ import { Provider } from 'react-redux';
 
 class AppContainer extends Component {
   static propTypes = {
-    routes: PropTypes.shape.isRequired,
-    store: PropTypes.shape.isRequired,
+    routes: PropTypes.shape({
+      childRoutes: PropTypes.arrayOf(PropTypes.shape({})),
+    }),
+    store: PropTypes.shape({}),
   }
 
-  shouldComponentUpdate () {
+  shouldComponentUpdate() {
     return false;
   }
 
@@ -18,7 +20,9 @@ class AppContainer extends Component {
     return (
       <Provider store={store}>
         <div style={{ height: '100%' }}>
-          <Router history={browserHistory} children={routes} />
+          <Router history={browserHistory}>
+            {routes}
+          </Router>
         </div>
       </Provider>
     );
