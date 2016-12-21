@@ -9,10 +9,6 @@ export const Header = () => (
       Home
     </IndexLink>
     {' · '}
-    <Link to='/counter' activeClassName='route--active'>
-      Counter
-    </Link>
-    {' · '}
     <Link to='/stock-correlation' activeClassName='route--active'>
       Stock Correlation
     </Link>
