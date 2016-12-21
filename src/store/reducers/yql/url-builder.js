@@ -6,6 +6,7 @@ const suffixes = {
   JSONP_CB: 'callback=cbfunc',
 };
 
+/* takes a query string as first argument, followed by any number of suffixes */
 function _buildUrl(...strs) {
   strs.push(suffixes.JSONP_CB);
   const newQueryStr = strs.join('&');
@@ -20,7 +21,8 @@ export default {
       return _buildUrl(queryStr, suffixes.DIAGNOSTICS);
     },
     historicalUrl: (interval, stockSymbol) => {
-      const queryStr = `select * from yahoo.finance.historicaldata where symbol = "${stockSymbol}" and startDate = "${interval.startDate}" and endDate = "${interval.endDate}"`;
+      const queryStr = `select * from yahoo.finance.historicaldata where symbol = "${stockSymbol}"
+      and startDate = "${interval.startDate}" and endDate = "${interval.endDate}"`;
       return _buildUrl(queryStr, suffixes.QUERY_ENV, suffixes.FORMAT_CB, suffixes.JSONP_CB);
     },
   },
