@@ -72,10 +72,6 @@ describe('(Internal Module) Location', () => {
       expect(updateLocation).to.be.a('function')
     })
 
-    it('Should return a function (is a thunk).', () => {
-      expect(updateLocation({ dispatch: _dispatchSpy })).to.be.a('function')
-    })
-
     it('Should call dispatch exactly once.', () => {
       updateLocation({ dispatch: _dispatchSpy })('/')
       expect(_dispatchSpy.should.have.been.calledOnce)
