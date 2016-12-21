@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../../components/Header'
-import './CoreLayout.scss'
+import Header from '../../components/header'
+import './core-layout.scss'
 import '../../styles/core.scss'
 
 export const CoreLayout = ({ children }) => (

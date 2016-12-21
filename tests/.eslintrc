@@ -1,11 +1,14 @@
 {
   "extends" : "../.eslintrc",
-  "env"     : {
-    "mocha" : true
-  },
-  "globals" : {
-    "expect" : false,
-    "should" : false,
-    "sinon"  : false
-  }
+    "env"     : {
+      "mocha" : true
+    },
+    "rules"    : {
+      "no-unused-expression": 0
+    },
+    "globals" : {
+      "expect" : true,
+      "should" : false,
+      "sinon"  : false
+    }
 }
