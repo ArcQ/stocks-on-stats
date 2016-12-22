@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { browserHistory } from 'react-router';
 import makeRootReducer from './reducers';
-import { updateLocation } from './location';
+import { updateLocation } from './reducers/location';
 
 export default (initialState = {}) => {
   // ======================================================
@@ -29,7 +29,6 @@ export default (initialState = {}) => {
     makeRootReducer(),
     initialState,
     composeEnhancers(
-      applyMiddleware(),
       ...enhancers,
     ),
   );

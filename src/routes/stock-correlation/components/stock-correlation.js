@@ -1,5 +1,5 @@
 import React from 'react';
-import YqlFacade from '../../../store/reducers/yql/yql-facade.js';
+import YqlFacade from 'utils/yql/yql-facade';
 
 export const StockCorrelation = props => (
   <div style={{ margin: '0 auto' }} >
