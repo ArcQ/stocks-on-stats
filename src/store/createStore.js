@@ -2,7 +2,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { browserHistory } from 'react-router';
 import { makeRootReducer, rootEpic } from './modules/root';
-import { updateLocation } from './modules/location';
+import { updateLocation, redirectToCalcResults } from './modules/location';
 
 export default (initialState = {}) => {
   // ======================================================
@@ -37,21 +37,8 @@ export default (initialState = {}) => {
   );
   store.asyncReducers = {};
 
-  let prevCalcListLength = 0;
-
-  function redirectToCalcResults() {
-    console.log('redirectToCalcResults');
-    const calcList = store.getState().calc.calcList;
-    if (!calcList) return;
-    if (calcList.length > prevCalcListLength) {
-      const url = store.location.split('?')[0] + store.calcList[store.calcList.length].calcId;
-      browserHistory.push(url);
-    }
-    prevCalcListLength = calcList.length;
-  }
-
   // to unsubscribe, call respective methods (calling twice unsubscribes)
-  store.unsubscribeCalcRequest = store.subscribe(redirectToCalcResults);
+  store.unsubscribeCalcRequest = store.subscribe(redirectToCalcResults(store));
   store.unsubscribeHistory = browserHistory.listen(updateLocation(store));
 
   if (module.hot) {
