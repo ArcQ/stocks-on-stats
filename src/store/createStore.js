@@ -37,7 +37,21 @@ export default (initialState = {}) => {
   );
   store.asyncReducers = {};
 
-  // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
+  let prevCalcListLength = 0;
+
+  function redirectToCalcResults() {
+    console.log('redirectToCalcResults');
+    const calcList = store.getState().calc.calcList;
+    if (!calcList) return;
+    if (calcList.length > prevCalcListLength) {
+      const url = store.location.split('?')[0] + store.calcList[store.calcList.length].calcId;
+      browserHistory.push(url);
+    }
+    prevCalcListLength = calcList.length;
+  }
+
+  // to unsubscribe, call respective methods (calling twice unsubscribes)
+  store.unsubscribeCalcRequest = store.subscribe(redirectToCalcResults);
   store.unsubscribeHistory = browserHistory.listen(updateLocation(store));
 
   if (module.hot) {
