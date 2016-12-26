@@ -1,12 +1,14 @@
+import { createEpicMiddleware } from 'redux-observable';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { browserHistory } from 'react-router';
-import makeRootReducer from './reducers';
-import { updateLocation } from './reducers/location';
+import { makeRootReducer, rootEpic } from './modules/root';
+import { updateLocation } from './modules/location';
 
 export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
+  const epicMiddleware = createEpicMiddleware(rootEpic);
 
   // ======================================================
   // Store Enhancers
@@ -29,6 +31,7 @@ export default (initialState = {}) => {
     makeRootReducer(),
     initialState,
     composeEnhancers(
+      applyMiddleware(epicMiddleware),
       ...enhancers,
     ),
   );
@@ -38,8 +41,8 @@ export default (initialState = {}) => {
   store.unsubscribeHistory = browserHistory.listen(updateLocation(store));
 
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const reducers = require('./reducers').default; // eslint-disable-line global-require
+    module.hot.accept('./modules/root', () => {
+      const reducers = require('./modules/root').makeRootReducer; // eslint-disable-line global-require
       store.replaceReducer(reducers(store.asyncReducers));
     });
   }

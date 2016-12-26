@@ -1,4 +1,4 @@
-import { injectReducer } from '../../store/reducers';
+import { injectReducer } from 'store/modules/root';
 
 export default store => ({
   path: 'stock-correlation',
