@@ -1,5 +1,5 @@
 import React from 'react';
-import YqlFacade from 'utils/yql/yql-facade';
+import { browserHistory } from 'react-router';
 
 export const StockCorrelation = props => (
   <div style={{ margin: '0 auto' }} >
@@ -11,18 +11,18 @@ export const StockCorrelation = props => (
     <button className='btn btn-default' onClick={props.doubleAsync}>
       Double (Async)
     </button>
+    <button className='btn btn-default' onClick={() => browserHistory.push('/stock-correlation?cid=1234')}>
+      GoTo Test
+    </button>
     <button
       className='btn btn-default'
       onClick={
         () =>
-        YqlFacade.getStockCorrelationRx({
+        props.calcRequest({
           startDate: '2013-01-01',
           endDate: '2013-07-01'
         }, 'g', 'stx')
       }>
-      Call
-    </button>
-    <button className='btn btn-default' onClick={console.log(YqlFacade)}>
       Call
     </button>
   </div>
