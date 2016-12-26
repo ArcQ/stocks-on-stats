@@ -1,13 +1,16 @@
 import YqlFacade from './utils/yql/yql-facade';
+import { browserHistory } from 'react-router';
+
 var uuid = require('node-uuid');
 // ------------------------------------
 // Constants
 // ------------------------------------
 const _STATE_IDLE = 0;
 const _STATE_PROCESSING = 1;
+const _STATE_ERROR = 2;
 
 export const CALC_REQUEST = 'CALC_REQUEST';
-export const NOTIFY_REQUEST_FINISH = 'NOTIFY_REQUEST_FINISH';
+export const NOTIFY_CALC_FINISH = 'NOTIFY_REQUEST_FINISH';
 export const CALC_REQUEST_ERR = 'CALC_REQUEST_ERR';
 
 // ------------------------------------
@@ -22,14 +25,14 @@ export function calcRequest(...args) {
 
 export function requestError(err = 'an error occurred') {
   return {
-    type: NOTIFY_REQUEST_FINISH,
+    type: NOTIFY_CALC_FINISH,
     payload: err,
   };
 }
-
+// TODO add error scenario
 export function notifyRequestFinish(location = '/') {
   return {
-    type: NOTIFY_REQUEST_FINISH,
+    type: NOTIFY_CALC_FINISH,
     response: location,
   };
 }
@@ -43,15 +46,26 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [CALC_REQUEST]: (state, action) => _STATE_PROCESSING,
-  [NOTIFY_REQUEST_FINISH]: (state, action) => Object.assign(
+  [CALC_REQUEST]: (state) => Object.assign(
     {},
     state,
     {
-      calcId: uuid.v1(),
-      calcType: action.calcType,
-      data: action.data,
-    }),
+      requestState: _STATE_PROCESSING,
+    },
+  ),
+  [NOTIFY_CALC_FINISH]: (state, action) => Object.assign(
+    {},
+    state,
+    {
+      calcList: [...state.calcList, {
+        calcId: uuid.v1(),
+        calcType: action.calcType,
+        data: action.data,
+      }],
+      requestState: _STATE_IDLE,
+      requestErrorCode: action.errorCode || null,
+    },
+  ),
 };
 
 // ------------------------------------
@@ -67,7 +81,7 @@ export function calcEpic(action$, store) {
     },
     )
     .map(data => ({
-      type: NOTIFY_REQUEST_FINISH,
+      type: NOTIFY_CALC_FINISH,
       calcType: action$.calcType,
       data,
     }),
@@ -77,11 +91,18 @@ export function calcEpic(action$, store) {
     );
 }
 
+// ------------------------------------
+// Store Listeners
+// ------------------------------------
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = _STATE_IDLE;
+const initialState = {
+  calcList: [],
+  requestState: _STATE_IDLE,
+  requestErrorCode: null,
+};
 
 export function calcReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
