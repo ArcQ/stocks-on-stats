@@ -9,6 +9,7 @@ const debug = require('debug')('app:config:webpack')
 const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
 const __TEST__ = project.globals.__TEST__
+const __URLS__ = project.globals.__URLS__;
 
 debug('Creating configuration.')
 const webpackConfig = {
@@ -18,7 +19,6 @@ const webpackConfig = {
   resolve : {
     root       : project.paths.client(),
     alias : {
-      "rxjs" : "rx-lite"
     },
     extensions : ['', '.js', '.jsx', '.json']
   },
@@ -32,9 +32,12 @@ const APP_ENTRY = project.paths.client('main.js')
 webpackConfig.entry = {
   app : __DEV__
     ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${project.compiler_public_path}__webpack_hmr`)
-    : [APP_ENTRY],
+    : [APP_ENTRY].concat('whatwg-fetch'),
   vendor : project.compiler_vendors
 }
+
+webpackConfig.entry.app.unshift('whatwg-fetch');
+console.log(webpackConfig.entry);
 
 // ------------------------------------
 // Bundle Output
@@ -52,6 +55,7 @@ webpackConfig.externals = {}
 webpackConfig.externals['react/lib/ExecutionEnvironment'] = true
 webpackConfig.externals['react/lib/ReactContext'] = true
 webpackConfig.externals['react/addons'] = true
+webpackConfig.externals['__URL_CONFIG__'] = __URLS__
 
 // ------------------------------------
 // Plugins
