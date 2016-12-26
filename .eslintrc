@@ -15,7 +15,8 @@
       "__DEV__"      : false,
       "__TEST__"     : false,
       "__PROD__"     : false,
-      "__COVERAGE__" : false
+      "__COVERAGE__" : false,
+      "__URL_CONFIG__" : false
     },
     "settings": {
       "import/resolver": {
@@ -32,5 +33,6 @@
       "no-param-reassign": ["error", { "props": false }],
       "no-mixed-operators": 1,
       "no-underscore-dangle": 0,
+      "import/no-unresolved": [2,{"ignore":[ 'rxjs']}]
     },
 }

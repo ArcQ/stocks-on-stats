@@ -83,8 +83,10 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
 }
+
+config.globals.__URLS__ = (config.globals.__DEV__) ? require('./urls/url.config.dev.json'): require('./urls/url.config.prod.json');
 
 // ------------------------------------
 // Validate Vendor Dependencies
