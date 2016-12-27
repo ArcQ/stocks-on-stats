@@ -84,7 +84,7 @@ export function calcEpic(action$, store) {
     .map(data => ({
       type: NOTIFY_CALC_FINISH,
       calcType: action$.calcType,
-      data:data.key,
+      data:data,
     }),
     )
     .catch(err => (
@@ -110,9 +110,9 @@ export const getCalcResult = createSelector(
   [getLocation, getCalcList],
   (location, calcList) => (
     location.search
-    ? calcList.filter(obj =>
-      obj.calcId === location.query.calcId).map(ele =>
-        ele.data)
+    ? calcList
+    .filter(obj => obj.calcId === location.query.calcId)
+    .map(ele => ele.data)
     : null
   ),
 );

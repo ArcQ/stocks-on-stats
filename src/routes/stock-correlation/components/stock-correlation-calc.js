@@ -1,5 +1,14 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+
+// sample matrix: [["g", "stx"], ["g", 1.0, 0.25], ["stx", 0.26, 1.0]]
+const StockMatrix =  calcResult => {
+  if(!calcResult) return;
+  calcResult.map((ele, i) => {
+    if(i==0) return (rowArr) => rowArr.map(ele => <div>{ ele }</div>);
+    return (rowArr) => rowArr.map((ele, i) => <div>{ ele }</div>)
+  });
+  return calcResult;
+};
 
 export const StockCorrelationCalc = props => {
   console.log(props.calcResult);
@@ -7,9 +16,10 @@ export const StockCorrelationCalc = props => {
     return (
       <div>
         <h2> Results </h2>
-        { props.calcResult }
+        { StockMatrix(props.calcResult) }
         { [<div>test1</div>, <div>test2</div>]}
-      </div>);
+      </div>
+    );
   }
   return null;
 };
