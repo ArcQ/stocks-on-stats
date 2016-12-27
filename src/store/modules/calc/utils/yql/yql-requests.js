@@ -11,15 +11,14 @@ export default {
     return Http.jsonp(url);
   },
   getHistoricalForStocks: (interval, stockSymbols) => {
-    const httpArr = stockSymbols.map(stockSymbol => {
+    const httpArr = stockSymbols.map((stockSymbol) => {
       const obj = {
         stockSymbol,
         url: UrlBuilder.build.historicalUrl(interval, stockSymbol),
       };
       return Http.jsonp(obj.url).map(res => ({
-        stockSymbol: obj.stockSymbol,
-        interval,
-        quotes: res.query.results.quote,
+        symbol: obj.stockSymbol,
+        data: res.query,
       }));
     });
 
