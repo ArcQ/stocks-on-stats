@@ -1,7 +1,8 @@
 import YqlFacade from './utils/yql/yql-facade';
 import { browserHistory } from 'react-router';
+import { createSelector } from 'reselect';
 
-var uuid = require('node-uuid');
+const uuid = require('node-uuid');
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -83,13 +84,38 @@ export function calcEpic(action$, store) {
     .map(data => ({
       type: NOTIFY_CALC_FINISH,
       calcType: action$.calcType,
-      data,
+      data:data.key,
     }),
     )
     .catch(err => (
       { type: CALC_REQUEST_ERR, err }),
     );
 }
+
+// ------------------------------------
+// Selectors
+// ------------------------------------
+
+
+const getLocation = state => state.location;
+const getCalcList = state => state.calc.calcList;
+
+// somewhat redundant due to getCalcResult, but makes component cleaner
+export const isCalcResult = createSelector(
+  [getLocation],
+  location => location.search.length > 0,
+);
+
+export const getCalcResult = createSelector(
+  [getLocation, getCalcList],
+  (location, calcList) => (
+    location.search
+    ? calcList.filter(obj =>
+      obj.calcId === location.query.calcId).map(ele =>
+        ele.data)
+    : null
+  ),
+);
 
 // ------------------------------------
 // Reducer

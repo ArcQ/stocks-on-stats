@@ -2,29 +2,27 @@ import { browserHistory } from 'react-router';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const LOCATION_CHANGE = 'LOCATION_CHANGE'
+export const LOCATION_CHANGE = 'LOCATION_CHANGE';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function locationChange (location = '/') {
-  console.log(location);
+export function locationChange(location = '/') {
   return {
-    type    : LOCATION_CHANGE,
-    payload : location
-  }
+    type: LOCATION_CHANGE,
+    payload: location,
+  };
 }
 
 // ------------------------------------
 // Specialized Action Creator
 // ------------------------------------
-export const updateLocation = ({ dispatch }) => {
-  return (nextLocation) => dispatch(locationChange(nextLocation))
-}
+export const updateLocation = ({ dispatch }) =>
+  (nextLocation) => dispatch(locationChange(nextLocation))
 
 let prevCalcListLength = 0;
 
-export function redirectToCalcResults(store){
+export function redirectToCalcResults(store) {
   return () => {
     const calcList = store.getState().calc.calcList;
     if (!calcList) return;
@@ -48,5 +46,5 @@ const initialState = browserHistory.getCurrentLocation();
 export default function locationReducer (state = initialState, action) {
   return action.type === LOCATION_CHANGE
     ? action.payload
-    : state
+    : state;
 }
