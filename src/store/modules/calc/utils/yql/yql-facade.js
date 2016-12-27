@@ -16,7 +16,7 @@ function _getStockCorrelation(interval, ...stockSymbols) {
     .flatMap(result =>{
       console.log(result);
       const url = `${_url}/calculators/stock-correlation`;
-      return Http.post(url, JSON.stringify({ "historicalData": result }));
+      return Http.post(url, JSON.stringify({ "stocks": result }));
     }
     )
 }
