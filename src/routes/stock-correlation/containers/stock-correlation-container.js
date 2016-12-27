@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { calcRequest } from 'store/modules/calc';
+import { calcRequest, isCalcResult, getCalcResult } from 'store/modules/calc';
 import { increment, doubleAsync } from '../modules/stock-correlation';
 import { locationChange } from 'store/modules/location';
 
@@ -9,11 +9,13 @@ const mapDispatchToProps = {
   increment: () => increment(1),
   doubleAsync,
   calcRequest,
-  locationChange: () => locationChange('/')
+  locationChange: () => locationChange('/'),
 };
 
 const mapStateToProps = state => ({
   counter: state.stockCorrelation,
+  isCalcResult: isCalcResult(state),
+  calcResult: getCalcResult(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StockCorrelation);
