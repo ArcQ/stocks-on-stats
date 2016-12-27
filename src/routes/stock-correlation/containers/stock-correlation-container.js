@@ -12,10 +12,25 @@ const mapDispatchToProps = {
   locationChange: () => locationChange('/'),
 };
 
+function deepClone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+// sample input structure: {"symbol": ["g", "stx"], "results": [[1.0, 0.25], [0.26, 1.0]]}
+// sample output structure: [["g", "stx"], ["g", 1.0, 0.25], ["stx", 0.26, 1.0]]
+function getFormattedData(state) {
+  const unformattedData = deepClone(getCalcResult(state))[0];
+  if (!unformattedData || !unformattedData.results) return;
+  let formattedData = unformattedData.results.splice(0);
+  formattedData.map((ele, i) => ele.unshift(unformattedData.symbols[i]))
+  formattedData.unshift(unformattedData.symbols);
+  return formattedData;
+}
+
 const mapStateToProps = state => ({
   counter: state.stockCorrelation,
   isCalcResult: isCalcResult(state),
-  calcResult: getCalcResult(state),
+  calcResult: getFormattedData(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StockCorrelation);
