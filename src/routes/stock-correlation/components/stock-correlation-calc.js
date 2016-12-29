@@ -1,7 +1,7 @@
 import React from 'react';
 
 // sample matrix: [["g", "stx"], ["g", 1.0, 0.25], ["stx", 0.26, 1.0]]
-const StockMatrix =  calcResult => {
+const StockMatrix = (calcResult) => {
   if(!calcResult) return;
   calcResult.map((ele, i) => {
     if(i==0) return (rowArr) => rowArr.map(ele => <div>{ ele }</div>);
