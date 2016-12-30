@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-toolbox/lib/commons.scss'
 import Table from 'react-toolbox/lib/table';
 import theme from 'styles/twoDimensionDataTable.scss';
 
@@ -35,7 +36,6 @@ export const StockCorrelationCalc = props => {
         <div>
           <h2> Results </h2>
           { StockMatrix(props.calcResult) }
-          { [<div>test1</div>, <div>test2</div>]}
         </div>
         <div>
           <Table
