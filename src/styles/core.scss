@@ -9,7 +9,7 @@ html {
 
 html,
 body {
-  margin: 0;
+  margin: 200px;
   padding: 0;
   height: 100%;
 }
@@ -18,4 +18,8 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+.twoDimensionDataTable {
+  background-color:blue !important,
 }
