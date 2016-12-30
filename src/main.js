@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'react-toolbox/lib/commons.scss'
 import createStore from './store/createStore';
 import AppContainer from './containers/app-container';
 import Routes from './routes';
-
 
 // ========================================================
 // Store Instantiation
