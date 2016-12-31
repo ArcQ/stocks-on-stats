@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-toolbox/lib/commons.scss'
 import Table from 'react-toolbox/lib/table';
 import theme from 'styles/twoDimensionDataTable.scss';
 

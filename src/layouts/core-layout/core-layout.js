@@ -1,14 +1,21 @@
 import React from 'react';
+import { Layout, Panel } from 'react-toolbox';
 import Header from '../../components/header';
-import './core-layout.scss';
+import Drawer from '../../components/drawer';
+import coreLayoutStyle from './core-layout.scss';
 import '../../styles/core.scss';
 
 export const CoreLayout = ({ children }) => (
-  <div className='container text-center'>
+  <div className={coreLayoutStyle['core-layout']}>
     <Header />
-    <div className='core-layout__viewport'>
-      {children}
-    </div>
+    <Layout>
+      <Drawer />
+      <Panel>
+        <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+          {children}
+        </div>
+      </Panel>
+    </Layout>
   </div>
 );
 
