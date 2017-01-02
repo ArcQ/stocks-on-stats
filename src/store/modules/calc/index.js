@@ -1,6 +1,5 @@
-import YqlFacade from './utils/yql/yql-facade';
-import { browserHistory } from 'react-router';
 import { createSelector } from 'reselect';
+import YqlFacade from './utils/yql/yql-facade';
 
 const uuid = require('node-uuid');
 // ------------------------------------
@@ -8,7 +7,6 @@ const uuid = require('node-uuid');
 // ------------------------------------
 const _STATE_IDLE = 0;
 const _STATE_PROCESSING = 1;
-const _STATE_ERROR = 2;
 
 export const CALC_REQUEST = 'CALC_REQUEST';
 export const NOTIFY_CALC_FINISH = 'NOTIFY_REQUEST_FINISH';
@@ -17,37 +15,40 @@ export const CALC_REQUEST_ERR = 'CALC_REQUEST_ERR';
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function calcRequest(...args) {
+export function makeCalc(...args) {
   return {
     type: CALC_REQUEST,
     payload: args,
   };
 }
 
-export function requestError(err = 'an error occurred') {
+export function finishCalcSuccess(calcType, response) {
   return {
     type: NOTIFY_CALC_FINISH,
-    payload: err,
+    calcType,
+    data: response,
   };
 }
+
 // TODO add error scenario
-export function notifyRequestFinish(location = '/') {
+export function finishCalcErr(err = 'an error occurred') {
   return {
-    type: NOTIFY_CALC_FINISH,
-    response: location,
+    type: CALC_REQUEST_ERR,
+    err,
   };
 }
 
 export const actions = {
-  calcRequest,
-  notifyRequestFinish,
+  makeCalc,
+  finishCalcSuccess,
+  finishCalcErr,
 };
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [CALC_REQUEST]: (state) => Object.assign(
+  [CALC_REQUEST]: state => Object.assign(
     {},
     state,
     {
@@ -76,19 +77,14 @@ const ACTION_HANDLERS = {
 export function calcEpic(action$, store) {
   return action$
     .ofType(CALC_REQUEST)
-    .mergeMap((action) => {
-      console.log('flatmap');
-      return YqlFacade.makeCalculation(store.getState().location, action.payload);
-    },
+    .mergeMap(action =>
+      YqlFacade.makeCalculation(store.getState().location, action.payload),
     )
-    .map(data => ({
-      type: NOTIFY_CALC_FINISH,
-      calcType: action$.calcType,
-      data:data,
-    }),
+    .map(data =>
+      actions.finishCalcSuccess(action$.calcType, data.response)
     )
-    .catch(err => (
-      { type: CALC_REQUEST_ERR, err }),
+    .catch(err =>
+      actions.finishCalcError(err)
     );
 }
 
