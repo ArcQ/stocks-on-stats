@@ -3,3 +3,6 @@ coverage/**
 node_modules/**
 dist/**
 src/index.html
+# ignoring config and bin so these files can stay close to template project repo
+config/**
+bin/**

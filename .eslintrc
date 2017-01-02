@@ -33,6 +33,7 @@
       "no-param-reassign": ["error", { "props": false }],
       "no-mixed-operators": 1,
       "no-underscore-dangle": 0,
-      "import/no-unresolved": [2,{"ignore":[ 'rxjs']}]
+      "import/no-unresolved": [2,{"ignore":[ 'rxjs']}],
+      "func-names":0
     },
 }
