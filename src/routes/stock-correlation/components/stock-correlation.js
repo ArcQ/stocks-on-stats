@@ -1,5 +1,4 @@
-import React from 'react';
-import { browserHistory } from 'react-router';
+import React, { PropTypes } from 'react';
 import Calc from './stock-correlation-calc';
 import Input from './stock-correlation-input';
 
@@ -11,9 +10,7 @@ export const StockCorrelation = props => (
 );
 
 StockCorrelation.propTypes = {
-  counter: React.PropTypes.number.isRequired,
-  doubleAsync: React.PropTypes.func.isRequired,
-  increment: React.PropTypes.func.isRequired,
+  isCalcResult: PropTypes.bool.isRequired,
 };
 
 export default StockCorrelation;
