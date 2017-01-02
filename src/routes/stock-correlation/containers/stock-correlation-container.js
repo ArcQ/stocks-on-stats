@@ -22,8 +22,8 @@ function getFormattedData(state) {
   if(!isCalcResult(state)) return;
   const unformattedData = deepClone(getCalcResult(state))[0];
   let formattedData = unformattedData.results.splice(0);
-  formattedData.map((ele, i) => ele.unshift(unformattedData.symbols[i]))
-  formattedData.unshift(unformattedData.symbols);
+  formattedData.map((ele, i) => ele.unshift(unformattedData.symbol[i]))
+  formattedData.unshift(unformattedData.symbol);
   return formattedData;
 }
 
