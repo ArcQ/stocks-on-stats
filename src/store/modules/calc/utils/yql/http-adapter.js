@@ -13,15 +13,12 @@ export default {
   }).then(response =>
     response.json()),
   ),
-  post: (url, payload) => {
-    console.log(payload);
-    return Observable.ajax.post(
-      url,
-      payload,
-      {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    );
-  },
+  post: (url, payload) => Observable.ajax.post(
+    url,
+    payload,
+    {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  ),
 };
