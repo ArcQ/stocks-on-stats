@@ -18,7 +18,7 @@ export const StockCorrelationInput = props => (
       className='btn btn-default'
       onClick={
         () =>
-        props.calcRequest({
+        props.makeCalc({
           startDate: '2013-01-01',
           endDate: '2013-07-01'
         }, 'g', 'stx')
