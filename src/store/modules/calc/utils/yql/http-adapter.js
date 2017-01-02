@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/Rx';
+import 'rxjs/add/observable/dom/ajax';
 
 export default {
   jsonp: url => Observable.from(fetchJsonp(url, {
@@ -14,15 +15,13 @@ export default {
   ),
   post: (url, payload) => {
     console.log(payload);
-    return Observable.from(
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: payload,
-      }).then(response => response.json()),
-    )
+    return Observable.ajax.post(
+      url,
+      payload,
+      {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
   },
 };
