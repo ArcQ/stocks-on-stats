@@ -113,6 +113,11 @@ export const getCalcResult = createSelector(
   ),
 );
 
+export const selectors = {
+  isCalcResult,
+  getCalcResult,
+};
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
