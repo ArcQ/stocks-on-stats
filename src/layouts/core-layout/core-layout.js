@@ -1,12 +1,12 @@
 import React from 'react';
 import { Layout, Panel } from 'react-toolbox';
-import Header from '../../components/header';
+import 'styles/core.scss';
+import Header from '../../components/Header';
 import Drawer from '../../components/drawer';
-import coreLayoutStyle from './core-layout.scss';
-import '../../styles/core.scss';
+import './core-layout.scss';
 
 export const CoreLayout = ({ children }) => (
-  <div className={coreLayoutStyle['core-layout']}>
+  <div className='core-layout'>
     <Header />
     <Layout>
       <Drawer />

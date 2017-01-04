@@ -139,11 +139,23 @@ webpackConfig.module.loaders = [{
 // ------------------------------------
 // We use cssnano with the postcss loader, so we tell
 // css-loader not to duplicate minimization.
-const BASE_CSS_LOADER = 'css?sourceMap&-minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+const BASE_SCSS_LOADER = 'css?sourceMap&-minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+const BASE_CSS_LOADER = 'css?sourceMap&-minimize';
+const toolboxPath = project.paths.base('node_modules/react-toolbox');
 
 webpackConfig.module.loaders.push({
   test    : /\.scss$/,
-  exclude : null,
+  include: toolboxPath,
+  loaders : [
+    'style',
+    BASE_SCSS_LOADER,
+    'postcss',
+    'sass?sourceMap'
+  ]
+})
+webpackConfig.module.loaders.push({
+  test    : /\.scss$/,
+  exclude : toolboxPath,
   loaders : [
     'style',
     BASE_CSS_LOADER,
