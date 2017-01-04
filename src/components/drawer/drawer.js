@@ -1,14 +1,13 @@
 import React from 'react';
 import { NavDrawer} from 'react-toolbox';
 import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
-import style from './drawer.scss';
 
 function Drawer() {
   return (
     <NavDrawer
-      active= { true }
-      pinned= { true }
-      className = {style.drawer}>
+      active={ true }
+      pinned={ true }
+      className= 'drawer' >
       <List selectable ripple>
         <ListSubHeader caption='Explore Calculators' />
         <ListItem
