@@ -5,9 +5,10 @@ import './header.scss';
 
 export const Header = () => (
   <AppBar
-    title="StocksOnStats"
-    leftIcon="menu">
-    <Navigation type="horizontal">
+    title='StocksOnStats'
+    leftIcon='menu'
+  >
+    <Navigation type='horizontal'>
       <IndexLink to='/' activeClassName='route--active'>
         Browse
       </IndexLink>

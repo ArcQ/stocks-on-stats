@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { combineEpics } from 'redux-observable';
 import locationReducer from './location';
 import { calcEpic, calcReducer, CALC_REQUEST } from './calc';
 
