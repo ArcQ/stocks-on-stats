@@ -20,8 +20,7 @@ export default {
       return _buildUrl(queryStr, suffixes.DIAGNOSTICS);
     },
     historicalUrl: ({ startDate, endDate }, stockSymbol) => {
-      const queryStr = `select * from yahoo.finance.historicaldata where \
-      symbol = "${stockSymbol}" and startDate = "${startDate}" and endDate = "${endDate}"`;
+      const queryStr = `select * from yahoo.finance.historicaldata where symbol = "${stockSymbol}" and startDate = "${startDate}" and endDate = "${endDate}"`;
       return _buildUrl(queryStr, suffixes.QUERY_ENV, suffixes.FORMAT_CB);
     },
   },
