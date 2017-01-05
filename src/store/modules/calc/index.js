@@ -81,10 +81,10 @@ export function calcEpic(action$, store) {
       YqlFacade.makeCalculation(store.getState().location, action.payload),
     )
     .map(data =>
-      actions.finishCalcSuccess(action$.calcType, data.response)
+      actions.finishCalcSuccess(action$.calcType, data.response),
     )
     .catch(err =>
-      actions.finishCalcError(err)
+      actions.finishCalcError(err),
     );
 }
 

@@ -43,7 +43,8 @@ export default (initialState = {}) => {
 
   if (module.hot) {
     module.hot.accept('./modules/root', () => {
-      const reducers = require('./modules/root').makeRootReducer; // eslint-disable-line global-require
+      // eslint-disable-next-line global-require
+      const reducers = require('./modules/root').makeRootReducer;
       store.replaceReducer(reducers(store.asyncReducers));
     });
   }

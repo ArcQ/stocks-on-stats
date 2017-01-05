@@ -1,25 +1,22 @@
 import YqlRequests from './yql-requests';
-import SosApiAdapter from '../sos-api-adapter';
-import { Observable } from 'rxjs/Observable';
 import Http from './http-adapter';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/Rx';
 
-const _url = "http://localhost:5000";
+// TODO load url from config based on env
+const _url = 'http://localhost:5000';
 
 function _getStockCorrelation(interval, ...stockSymbols) {
   return YqlRequests
     .checkSymbols(stockSymbols)
     .flatMap(() =>
-      YqlRequests.getHistoricalForStocks(interval, stockSymbols)
+      YqlRequests.getHistoricalForStocks(interval, stockSymbols),
     )
-    .flatMap(result => {
+    .flatMap((result) => {
       const url = `${_url}/calculators/stock-correlation`;
       // TODO api needs a structure fix, temporarily setting interval
       interval = 3;
-      return Http.post(url, JSON.stringify({ "stocks": result, "interval": interval }));
-    }
-    )
+      return Http.post(url, JSON.stringify({ stocks: result, interval }));
+    },
+    );
 }
 
 const calculatorDict = {
