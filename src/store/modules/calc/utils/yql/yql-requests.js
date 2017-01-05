@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
-import 'rxjs/Rx';
+
 import Http from './http-adapter';
 import UrlBuilder from './url-builder';
 

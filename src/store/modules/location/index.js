@@ -18,7 +18,7 @@ export function locationChange(location = '/') {
 // Specialized Action Creator
 // ------------------------------------
 export const updateLocation = ({ dispatch }) =>
-  (nextLocation) => dispatch(locationChange(nextLocation))
+  nextLocation => dispatch(locationChange(nextLocation));
 
 let prevCalcListLength = 0;
 
@@ -43,7 +43,7 @@ export function redirectToCalcResults(store) {
 // ------------------------------------
 const initialState = browserHistory.getCurrentLocation();
 
-export default function locationReducer (state = initialState, action) {
+export default function locationReducer(state = initialState, action) {
   return action.type === LOCATION_CHANGE
     ? action.payload
     : state;
