@@ -134,7 +134,10 @@
     "file-loader": "^0.9.0",
     "fs-extra": "^1.0.0",
     "html-webpack-plugin": "^2.22.0",
+<<<<<<< HEAD
     "immutability-helper": "^2.0.0",
+=======
+>>>>>>> 40c549f... temp
     "imports-loader": "^0.7.0",
     "ip": "^1.1.2",
     "json-loader": "^0.5.4",
@@ -150,7 +153,12 @@
     "normalize.css": "^5.0.0",
     "phantomjs-prebuilt": "^2.1.12",
     "postcss-loader": "^1.1.0",
+<<<<<<< HEAD
     "react-addons-css-transition-group": "^15.4.1",
+=======
+    "react-addons-test-utils": "^15.0.0",
+    "redbox-react": "^1.2.10",
+>>>>>>> 40c549f... temp
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.0",
     "sinon": "^1.17.5",

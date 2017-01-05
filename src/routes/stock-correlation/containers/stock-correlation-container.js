@@ -20,12 +20,18 @@ function getFormattedDateStr(...args) {
   const concatDateStr = (year, month, day) => `${year}-${month}-${day}`;
   return (args.length > 1)
     ? concatDateStr(...args)
-    : concatDateStr(args[0].getFullYear(), args[0].getMonth(), args[0].getDate());
+    : concatDateStr(args[0].getFullYear(), args[0].getMonth() + 1, args[0].getDate());
 }
 
 function getDateBackByMonths(month = 0) {
   const dt = new Date();
   return new Date(dt.setMonth(dt.getMonth() - month));
+}
+
+function bindFuncsToSelf(...funcNameArr) {
+  funcNameArr.forEach((funcName) => {
+    this[funcName] = this[funcName].bind(this);
+  });
 }
 
 
@@ -41,10 +47,20 @@ class StockCorrelationContainer extends React.Component {
         max: getDateBackByMonths(),
       },
     };
-    this.handleTagInput = this.handleTagInput.bind(this);
+
+    bindFuncsToSelf.call(this,
+      'handleTagInput',
+      'getFormattedInterval',
+    );
+
     this.handleStartDateInput = this.handleDateInput.bind(this, START_DATE_KEY);
     this.handleEndDateInput = this.handleDateInput.bind(this, END_DATE_KEY);
-    this.makeStockCorrelationCalc = this.makeStockCorrelationCalc.bind(this);
+  }
+  getFormattedInterval() {
+    return update(this.state.interval, {
+      [START_DATE_KEY]: { $apply: date => getFormattedDateStr(date) },
+      [END_DATE_KEY]: { $apply: date => getFormattedDateStr(date) },
+    });
   }
   handleDateInput(key, date) {
     const newInterval = update(this.state.interval, {
@@ -55,24 +71,18 @@ class StockCorrelationContainer extends React.Component {
   handleTagInput(tags) {
     this.setState({ taggedStocks: tags });
   }
-  makeStockCorrelationCalc() {
-    const formattedInterval = update(this.state.interval, {
-      [START_DATE_KEY]: { $apply: date => getFormattedDateStr(date) },
-      [END_DATE_KEY]: { $apply: date => getFormattedDateStr(date) },
-    });
-    makeCalc(formattedInterval, ...this.state.taggedStocks);
-  }
   render() {
     return (
       <div>
         { StockCorrelation({
           ...this.props,
           ...this.state,
+          keyCodesForAdd,
           handleTagInput: this.handleTagInput,
           handleStartDateInput: this.handleStartDateInput,
           handleEndDateInput: this.handleEndDateInput,
           makeStockCorrelationCalc: this.makeStockCorrelationCalc,
-          keyCodesForAdd,
+          getFormattedInterval: this.getFormattedInterval,
         })
         }
       </div>);
@@ -80,6 +90,7 @@ class StockCorrelationContainer extends React.Component {
 }
 
 const mapDispatchToProps = {
+  makeCalc,
 };
 
 const mapStateToProps = state => ({
