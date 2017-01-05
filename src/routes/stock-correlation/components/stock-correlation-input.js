@@ -39,7 +39,7 @@ export const StockCorrelationInput = props => (
     </section>
     <Button
       className='btn btn-default'
-      onClick={() => props.makeStockCorrelationCalc()}
+      onClick={() => props.makeCalc(props.getFormattedInterval(), ...props.taggedStocks)}
       raised
       primary
     >
@@ -49,7 +49,6 @@ export const StockCorrelationInput = props => (
 );
 
 StockCorrelationInput.propTypes = {
-  makeStockCorrelationCalc: PropTypes.func.isRequired,
   keyCodesForAdd: PropTypes.arrayOf(PropTypes.number),
   taggedStocks: PropTypes.arrayOf(PropTypes.string).isRequired,
   interval: PropTypes.shape({
@@ -61,6 +60,8 @@ StockCorrelationInput.propTypes = {
   handleStartDateInput: PropTypes.func.isRequired,
   handleEndDateInput: PropTypes.func.isRequired,
   handleTagInput: PropTypes.func.isRequired,
+  makeCalc: PropTypes.func.isRequired,
+  getFormattedInterval: PropTypes.func.isRequired,
 };
 
 export default StockCorrelationInput;
