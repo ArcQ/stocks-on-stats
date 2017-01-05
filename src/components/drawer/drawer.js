@@ -1,23 +1,25 @@
 import React from 'react';
-import { NavDrawer} from 'react-toolbox';
-import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
+import { NavDrawer } from 'react-toolbox';
+import { List, ListItem, ListSubHeader, ListDivider } from 'react-toolbox/lib/list';
 
 function Drawer() {
   return (
     <NavDrawer
-      active={ true }
-      pinned={ true }
-      className= 'drawer' >
+      active
+      pinned
+      className='drawer'
+    >
       <List selectable ripple>
         <ListSubHeader caption='Explore Calculators' />
         <ListItem
-          caption='Correlation'
+          caption='Stock Correlation'
         />
         <ListDivider />
         <ListItem
           caption='Help'
           legend='Need help using calculators?'
-          leftIcon='help' />
+          leftIcon='help'
+        />
         <ListItem
           caption='Contact'
           legend='Need More Calculators?'

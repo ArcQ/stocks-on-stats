@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Table from 'react-toolbox/lib/table';
 import theme from 'styles/twoDimensionDataTable.scss';
 
-export const StockCorrelationCalc = (props) => (
+export const StockCorrelationCalc = props => (
   <div>
     <div>
       <h2> Results </h2>
