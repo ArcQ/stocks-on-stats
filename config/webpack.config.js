@@ -31,8 +31,8 @@ const APP_ENTRY = project.paths.client('main.js')
 
 webpackConfig.entry = {
   app : __DEV__
-    ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${project.compiler_public_path}__webpack_hmr`)
-    : [APP_ENTRY].concat('whatwg-fetch'),
+  ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${project.compiler_public_path}__webpack_hmr`)
+  : [APP_ENTRY].concat('whatwg-fetch'),
   vendor : project.compiler_vendors
 }
 
@@ -203,9 +203,12 @@ webpackConfig.module.loaders.push(
   { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
   { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
   { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-  { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+  // { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+  { test: /\.svg$/, loader: 'babel?presets[]=es2015,presets[]=react!react-svg' },
   { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
 )
+
+
 /* eslint-enable */
 
 // ------------------------------------
