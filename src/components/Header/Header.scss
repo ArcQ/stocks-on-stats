@@ -1,4 +1,15 @@
-.route--active {
+.routeActive {
   font-weight: bold;
-  text-decoration: underline;
+}
+
+.mainAppBar {
+  button {
+    width:4.5rem !important;
+    height:4.5rem !important;
+    margin-right:2px;
+  }
+}
+
+.logo {
+  font-size:2.6rem !important;
 }
