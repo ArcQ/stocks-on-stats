@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout, Panel } from 'react-toolbox';
 import 'styles/core.scss';
-import Header from '../../components/header';
-import Drawer from '../../components/drawer';
+import Header from 'components/header';
+import Drawer from 'containers/drawer-container';
 import './core-layout.scss';
 
 export const CoreLayout = ({ children }) => (
