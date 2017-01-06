@@ -163,15 +163,23 @@ webpackConfig.module.loaders.push({
     'sass?sourceMap'
   ]
 })
+
 webpackConfig.module.loaders.push({
   test    : /\.css$/,
-  exclude : null,
+  exclude : /flexboxgrid/,
   loaders : [
     'style',
     BASE_CSS_LOADER,
     'postcss'
   ]
 })
+
+webpackConfig.module.loaders.push({
+  test: /\.css$/,
+  loader: 'style!css?modules',
+  include: /flexboxgrid/,
+})
+
 
 webpackConfig.sassLoader = {
   includePaths : project.paths.client('styles')

@@ -28,9 +28,9 @@ const tempArr = [
 function Drawer(props) {
   return (
     <NavDrawer
-      active
-      pinned
       className='drawer'
+      scrollY
+      permanentAt='sm'
     >
       <Navigation type='vertical'>
         <List selectable ripple>
