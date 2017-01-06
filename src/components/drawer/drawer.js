@@ -30,7 +30,7 @@ function Drawer(props) {
     <NavDrawer
       className='drawer'
       scrollY
-      permanentAt='sm'
+      permanentAt={'sm'}
     >
       <Navigation type='vertical'>
         <List selectable ripple>
