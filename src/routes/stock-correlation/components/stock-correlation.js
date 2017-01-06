@@ -19,9 +19,9 @@ export const StockCorrelation = props => (
     <h2>Correlation Matrix</h2>
     <Row className='calcRow' >
       <Col xs={12} md={7}>
-        <h4>Input</h4>
+        <h4 className='calcSubtitle'>Input</h4>
         { Input(props) }
-        <h4>Results</h4>
+        <h4 className='calcSubtitle'>Results</h4>
         { (!props.isCalcResult) && <IdleAnimation /> }
         { (props.isCalcResult) && Calc(props) }
       </Col>
