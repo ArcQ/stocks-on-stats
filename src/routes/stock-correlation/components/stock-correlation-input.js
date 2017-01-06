@@ -8,7 +8,6 @@ import './stock-correlation.scss';
 
 export const StockCorrelationInput = props => (
   <div>
-    <h2>Correlation Matrix</h2>
     <TagsInput
       value={props.taggedStocks}
       addKeys={props.keyCodesForAdd}
