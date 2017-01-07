@@ -16,7 +16,7 @@ const IdleAnimation = () => (
 
 export const LimitOrderSuccess = props => (
   <div>
-    <h2>Correlation Matrix</h2>
+    <h2>Limit Order Success</h2>
     <Row className='calcRow' >
       <Col xs={12} md={7}>
         <h4 className='calcSubtitle'>Input</h4>

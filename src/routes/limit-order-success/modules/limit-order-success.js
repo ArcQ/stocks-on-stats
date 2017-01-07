@@ -57,7 +57,6 @@ export function getFormattedData(state) {
     corrArr.forEach((corr, j) => {
       newEle[unformattedData.symbol[j]] = (corr < 1) ? `${(corr * 100).toFixed(2)}%` : 1;
     });
-
     return newEle;
   });
 
