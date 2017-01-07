@@ -11,10 +11,11 @@ function getNavListItems(routesArr, router) {
       str.charAt(0).toUpperCase() + str.slice(1),
     ).join(' ');
   };
+  // TODO should change all listItems to link liste items and use to:'#/test'
   return listItems.map((routeStr, i) => (
     <ListItem
       key={i}
-      onClick={() => router.push(routeStr)}
+      onClick={() => router.push({ pathname:routeStr })}
       caption={formatCaption(routeStr)}
     />
   ));
