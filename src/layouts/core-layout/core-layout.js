@@ -11,7 +11,7 @@ export const CoreLayout = ({ children }) => (
     <Layout>
       <Drawer />
       <Panel>
-        <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+        <div className='panelContainer'>
           {children}
         </div>
       </Panel>
