@@ -1,5 +1,15 @@
-.duck {
-  display: block;
-  width: 120px;
-  margin: 1.5rem auto;
+$colorOne = black;
+$colorTwo = white;
+$colorThree = teal;
+.homeSection {
+  width:100%;
+  padding:30px;
+}
+
+.homeSection:nth-child(odd) {
+  background-color: $colorOne;
+}
+
+.homeSection:nth-child(even) {
+  background-color: $colorTwo;
 }
