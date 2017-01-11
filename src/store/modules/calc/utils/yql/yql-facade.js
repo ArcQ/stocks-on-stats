@@ -19,6 +19,22 @@ function _getStockCorrelation(interval, ...stockSymbols) {
     );
 }
 
+function getHistoricalThenReqCalc(additionalAttrs, ...stockSymbols) {
+  return YqlRequests
+    .checkSymbols(stockSymbols)
+    .flatMap(() =>
+      YqlRequests.getHistoricalForStocks(interval, stockSymbols),
+    )
+    .flatMap((result) => {
+      const url = `${_url}/calculators/stock-correlation`;
+      // TODO api needs a structure fix, temporarily setting interval
+      interval = 3;
+      return Http.post(url, JSON.stringify({ stocks: result, interval }));
+    },
+    );
+
+}
+
 const calculatorDict = {
   'stock-correlation': _getStockCorrelation,
 };
