@@ -2,6 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { makeCalc } from 'store/modules/calc/';
 import update from 'immutability-helper';
+import {
+  START_DATE_KEY,
+  END_DATE_KEY,
+  getDateBackByMonths,
+  getFormattedDateStr,
+  getDefaultTimeSpan,
+} from 'utils';
 
 import { selectors } from '../modules/stock-correlation';
 
@@ -10,66 +17,32 @@ import StockCorrelation from '../components/stock-correlation';
 const TAB_KEY_CODE = 9;
 const RETURN_KEY_CODE = 13;
 const SEMI_COLON_KEY_CODE = 186;
-const START_DATE_KEY = 'startDate';
-const END_DATE_KEY = 'endDate';
+const INTERVAL_INPUT_KEY = 'interval';
+const TAG_INPUT_KEY = 'taggedStocks';
 
 const keyCodesForAdd = [TAB_KEY_CODE, RETURN_KEY_CODE, SEMI_COLON_KEY_CODE];
-
-// takes variable arguments: 1(date) or 3(year,month,day)
-function getFormattedDateStr(...args) {
-  const concatDateStr = (year, month, day) => `${year}-${month}-${day}`;
-  return (args.length > 1)
-    ? concatDateStr(...args)
-    : concatDateStr(args[0].getFullYear(), args[0].getMonth() + 1, args[0].getDate());
-}
-
-function getDateBackByMonths(month = 0) {
-  const dt = new Date();
-  return new Date(dt.setMonth(dt.getMonth() - month));
-}
-
-function bindFuncsToSelf(...funcNameArr) {
-  funcNameArr.forEach((funcName) => {
-    this[funcName] = this[funcName].bind(this);
-  });
-}
-
 
 class StockCorrelationContainer extends React.Component {
   constructor() {
     super();
     this.state = {
       taggedStocks: [],
-      interval: {
-        startDate: getDateBackByMonths(1),
-        endDate: getDateBackByMonths(),
+      timeSpan: getDefaultTimeSpan(),
+      datePicker: {
         min: getDateBackByMonths(12),
         max: getDateBackByMonths(),
       },
+      interval: '1',
     };
-
-    bindFuncsToSelf.call(this,
-      'handleTagInput',
-      'getFormattedInterval',
-    );
-
-    this.handleStartDateInput = this.handleDateInput.bind(this, START_DATE_KEY);
-    this.handleEndDateInput = this.handleDateInput.bind(this, END_DATE_KEY);
-  }
-  getFormattedInterval() {
-    return update(this.state.interval, {
-      [START_DATE_KEY]: { $apply: date => getFormattedDateStr(date) },
-      [END_DATE_KEY]: { $apply: date => getFormattedDateStr(date) },
-    });
   }
   handleDateInput(key, date) {
-    const newInterval = update(this.state.interval, {
+    const newTimespan = update(this.state.timeSpan, {
       [key]: { $set: date },
     });
-    this.setState({ interval: newInterval });
+    this.setState({ timeSpan: newTimespan });
   }
-  handleTagInput(tags) {
-    this.setState({ taggedStocks: tags });
+  handleGenericInput(key, value) {
+    this.setState({ [key]: value });
   }
   render() {
     return (
@@ -78,13 +51,12 @@ class StockCorrelationContainer extends React.Component {
           ...this.props,
           ...this.state,
           keyCodesForAdd,
-          handleTagInput: this.handleTagInput,
-          handleStartDateInput: this.handleStartDateInput,
-          handleEndDateInput: this.handleEndDateInput,
+          handleTagInput: this.handleGenericInput.bind(this, TAG_INPUT_KEY),
+          handleIntervalInput: this.handleGenericInput.bind(this, INTERVAL_INPUT_KEY),
+          handleStartDateInput: this.handleDateInput.bind(this, START_DATE_KEY),
+          handleEndDateInput: this.handleDateInput.bind(this, END_DATE_KEY),
           makeStockCorrelationCalc: this.makeStockCorrelationCalc,
-          getFormattedInterval: this.getFormattedInterval,
-        })
-        }
+        })}
       </div>);
   }
 }
