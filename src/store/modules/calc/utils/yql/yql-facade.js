@@ -4,40 +4,20 @@ import Http from './http-adapter';
 // TODO load url from config based on env
 const _url = 'http://localhost:5000';
 
-function _getStockCorrelation(interval, ...stockSymbols) {
-  return YqlRequests
-    .checkSymbols(stockSymbols)
-    .flatMap(() =>
-      YqlRequests.getHistoricalForStocks(interval, stockSymbols),
-    )
-    .flatMap((result) => {
-      const url = `${_url}/calculators/stock-correlation`;
-      // TODO api needs a structure fix, temporarily setting interval
-      interval = 3;
-      return Http.post(url, JSON.stringify({ stocks: result, interval }));
-    },
-    );
-}
-
 function getHistoricalThenReqCalc(additionalAttrs, ...stockSymbols) {
+  console.log(arguments);
   return YqlRequests
     .checkSymbols(stockSymbols)
     .flatMap(() =>
-      YqlRequests.getHistoricalForStocks(interval, stockSymbols),
+      YqlRequests.getHistoricalForStocks(additionalAttrs, stockSymbols),
     )
     .flatMap((result) => {
       const url = `${_url}/calculators/stock-correlation`;
       // TODO api needs a structure fix, temporarily setting interval
-      interval = 3;
-      return Http.post(url, JSON.stringify({ stocks: result, interval }));
+      return Http.post(url, JSON.stringify({ stocks: result, ...additionalAttrs }));
     },
     );
-
 }
-
-const calculatorDict = {
-  'stock-correlation': _getStockCorrelation,
-};
 
 export default{
   /* makeCalculation: function
@@ -45,5 +25,5 @@ export default{
   {param 1}: takes location to see which calculator methods to use
   {param 2+}: rest of parameters should match the method it is calling eg. getStockCorrelation
   */
-  makeCalculation: (location, args) => _getStockCorrelation(...args),
+  makeCalculation: (location, args) => getHistoricalThenReqCalc(...args),
 };
