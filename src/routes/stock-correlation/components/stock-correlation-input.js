@@ -71,7 +71,13 @@ export const StockCorrelationInput = props => (
     </section>
     <Button
       className='btn btn-default'
-      onClick={() => props.makeCalc(getFormattedTimeSpan(props.timeSpan), ...props.taggedStocks)}
+      onClick={() => props.makeCalc(
+        {
+          timeSpan: getFormattedTimeSpan(props.timeSpan),
+          interval: props.interval,
+        },
+        ...props.taggedStocks,
+      )}
       raised
       primary
     >

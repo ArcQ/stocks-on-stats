@@ -19,8 +19,10 @@ export default {
       const queryStr = `select * from yahoo.finance.quotes where symbol in ("${symbolStr}")`;
       return _buildUrl(queryStr, suffixes.DIAGNOSTICS);
     },
-    historicalUrl: ({ startDate, endDate }, stockSymbol) => {
-      const queryStr = `select * from yahoo.finance.historicaldata where symbol = "${stockSymbol}" and startDate = "${startDate}" and endDate = "${endDate}"`;
+    historicalUrl: (additionalAttrs, stockSymbol) => {
+      const { startDate, endDate } = additionalAttrs.timeSpan;
+      const queryStr = `select * from yahoo.finance.historicaldata where \
+      symbol = "${stockSymbol}" and startDate = "${startDate}" and endDate = "${endDate}"`;
       return _buildUrl(queryStr, suffixes.QUERY_ENV, suffixes.FORMAT_CB);
     },
   },
