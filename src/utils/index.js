@@ -2,6 +2,11 @@ import update from 'immutability-helper';
 
 export const START_DATE_KEY = 'startDate';
 export const END_DATE_KEY = 'endDate';
+const TAB_KEY_CODE = 9;
+const RETURN_KEY_CODE = 13;
+const SEMI_COLON_KEY_CODE = 186;
+
+export const keyCodesForAdd = [TAB_KEY_CODE, RETURN_KEY_CODE, SEMI_COLON_KEY_CODE];
 
 // takes variable arguments: 1(date) or 3(year,month,day)
 export function getFormattedDateStr(...args) {
