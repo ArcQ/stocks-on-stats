@@ -13,6 +13,7 @@ import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import { getFormattedTimeSpan } from 'utils';
 import './stock-correlation.scss';
+import { keyCodesForAdd } from 'utils'
 
 const IntervalTitle = ({ theme, ...props }) => {
   return (<div className='intervalLink'>
@@ -33,7 +34,7 @@ export const StockCorrelationInput = props => (
   <div>
     <TagsInput
       value={props.taggedStocks}
-      addKeys={props.keyCodesForAdd}
+      addKeys={keyCodesForAdd}
       onChange={props.handleTagInput}
       inputProps={{
         className: 'react-tagsinput-input',
