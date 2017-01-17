@@ -6,7 +6,7 @@ import update from 'immutability-helper';
 import { selectors } from '../modules/limit-order-success';
 import LimitOrderSuccess from '../components/limit-order-success';
 
-const STOCK_SYMBOL_KEY = 'stockSymbol';
+const TAG_INPUT_KEY = 'taggedStocks';
 const CURRENT_PRICE_KEY = 'current';
 const LIMIT_PRICE_KEY = 'limit';
 
@@ -14,19 +14,19 @@ class LimitOrderSuccessContainer extends React.Component {
   constructor() {
     super();
     this.state = {
-      stockSymbol: '',
+      taggedStocks: [],
       prices: {
         current: '',
         limit: '',
       },
     };
 
-    this.handleStockSymbolInput = this.transferInputChangeToState.bind(this, STOCK_SYMBOL_KEY);
-    this.handleCurrentPriceInput = this.transferInputChangeToState.bind(this, CURRENT_PRICE_KEY);
-    this.handleLimitPriceInput = this.transferInputChangeToState.bind(this, LIMIT_PRICE_KEY);
+    this.handleTagInput = this.handleGenericInput.bind(this, TAG_INPUT_KEY);
+    this.handleCurrentPriceInput = this.handleGenericInput.bind(this, CURRENT_PRICE_KEY);
+    this.handleLimitPriceInput = this.handleGenericInput.bind(this, LIMIT_PRICE_KEY);
   }
-  transferInputChangeToState(key, value) {
-    if (key === STOCK_SYMBOL_KEY) {
+  handleGenericInput(key, value) {
+    if (key === TAG_INPUT_KEY) {
       this.setState({ [key]: value });
     } else {
       const newPrices = update(this.state.prices, {
@@ -41,7 +41,7 @@ class LimitOrderSuccessContainer extends React.Component {
         { LimitOrderSuccess({
           ...this.props,
           ...this.state,
-          handleStockSymbolInput: this.handleStockSymbolInput,
+          handleTagInput: this.handleTagInput,
           handleCurrentPriceInput: this.handleCurrentPriceInput,
           handleLimitPriceInput: this.handleLimitPriceInput,
         })

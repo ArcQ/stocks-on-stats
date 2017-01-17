@@ -1,18 +1,23 @@
 import React, { PropTypes } from 'react';
 import { Button, section, Input } from 'react-toolbox';
+import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import './limit-order-success.scss';
+import { keyCodesForAdd } from 'utils'
 
 // TODO when user goes beyond 1 year on date picker, show dialog alerting user of limitation
 
 export const LimitOrderSuccessInput = props => (
   <div>
-    <Input
-      type='text'
-      label='Stock Symbol'
-      name='StockSymbol'
-      onChange={props.handleStockSymbolInput}
-      value={props.stockSymbol}
+    <TagsInput
+      value={props.taggedStocks}
+      addKeys={keyCodesForAdd}
+      onChange={props.handleTagInput}
+      inputProps={{
+        className: 'react-tagsinput-input',
+        placeholder: 'eg. GOOG;AAPL;AMZN;',
+      }}
+      onlyUnique
     />
     <section>
       <Input
@@ -32,7 +37,12 @@ export const LimitOrderSuccessInput = props => (
     </section>
     <Button
       className='btn btn-default'
-      onClick={() => props.makeCalc(props.stockSymbol, props.prices)}
+      onClick={() => props.makeCalc(
+        {
+          prices: props.prices,
+        },
+        ...props.taggedStocks,
+      )}
       raised
       primary
     >
@@ -42,12 +52,12 @@ export const LimitOrderSuccessInput = props => (
 );
 
 LimitOrderSuccessInput.propTypes = {
-  stockSymbol: PropTypes.string.isRequired,
+  taggedStocks: PropTypes.string.isRequired,
   prices: PropTypes.shape({
     current: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired,
   }).isRequired,
-  handleStockSymbolInput: PropTypes.func.isRequired,
+  handleTagInput: PropTypes.func.isRequired,
   handleCurrentPriceInput: PropTypes.func.isRequired,
   handleLimitPriceInput: PropTypes.func.isRequired,
   makeCalc: PropTypes.func.isRequired,

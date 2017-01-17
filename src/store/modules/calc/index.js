@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 import YqlFacade from './utils/yql/yql-facade';
+import { Observable } from 'rxjs/Observable';
+import { Scheduler } from 'rxjs/Scheduler';
 
 const uuid = require('node-uuid');
 // ------------------------------------
@@ -7,6 +9,7 @@ const uuid = require('node-uuid');
 // ------------------------------------
 const _STATE_IDLE = 0;
 const _STATE_PROCESSING = 1;
+const _STATE_ERROR = 2;
 
 export const CALC_REQUEST = 'CALC_REQUEST';
 export const NOTIFY_CALC_FINISH = 'NOTIFY_REQUEST_FINISH';
@@ -32,9 +35,10 @@ export function finishCalcSuccess(calcType, response) {
 
 // TODO add error scenario
 export function finishCalcErr(err = 'an error occurred') {
+  console.log(err);
   return {
     type: CALC_REQUEST_ERR,
-    err,
+    errorCode: err,
   };
 }
 
@@ -53,6 +57,14 @@ const ACTION_HANDLERS = {
     state,
     {
       requestState: _STATE_PROCESSING,
+    },
+  ),
+  [CALC_REQUEST_ERR]: (state, action) => Object.assign(
+    {},
+    state,
+    {
+      requestState: _STATE_ERROR,
+      requestErrorCode: action.errorCode || null,
     },
   ),
   [NOTIFY_CALC_FINISH]: (state, action) => Object.assign(
@@ -83,9 +95,10 @@ export function calcEpic(action$, store) {
     .map(data =>
       actions.finishCalcSuccess(action$.calcType, data.response),
     )
-    .catch(err =>
-      actions.finishCalcError(err),
-    );
+    .catch(error =>
+      actions.finishCalcErr(error),
+    )
+    .retry();
 }
 
 // ------------------------------------
