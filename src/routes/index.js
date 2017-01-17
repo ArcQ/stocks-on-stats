@@ -5,7 +5,7 @@ import StockCorrelationRoute from './stock-correlation';
 import LimitOrderSuccessRoute from './limit-order-success';
 
 export const routes = store => ({
-  path: '/',
+  path: '/calculators',
   component: CoreLayout,
   indexRoute: Home,
   childRoutes: [
