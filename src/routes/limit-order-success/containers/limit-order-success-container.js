@@ -25,14 +25,20 @@ class LimitOrderSuccessContainer extends React.Component {
     this.handleCurrentPriceInput = this.handleGenericInput.bind(this, CURRENT_PRICE_KEY);
     this.handleLimitPriceInput = this.handleGenericInput.bind(this, LIMIT_PRICE_KEY);
   }
+  // TODO seperate genericInput into 2 functions afterall
   handleGenericInput(key, value) {
     if (key === TAG_INPUT_KEY) {
       this.setState({ [key]: value });
     } else {
-      const newPrices = update(this.state.prices, {
-        [key]: { $set: value },
-      });
-      this.setState({ prices: newPrices });
+      const parsedValue = parseInt(value, 10);
+      if (parsedValue != NaN) {
+        const newPrices = update(this.state.prices, {
+          [key]: { $set: parsedValue },
+        });
+        this.setState({ prices: newPrices });
+      } else {
+        //TODO add error case (what if not number?)
+      }
     }
   }
   render() {
@@ -49,6 +55,8 @@ class LimitOrderSuccessContainer extends React.Component {
       </div>);
   }
 }
+
+// TODO add validation either in calc or realtime
 
 const mapDispatchToProps = {
   makeCalc,
