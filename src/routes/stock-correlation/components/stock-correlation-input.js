@@ -9,11 +9,11 @@ import {
   Link,
   Tooltip,
 } from 'react-toolbox';
+
+import { keyCodesForAdd } from 'utils';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
-import { getFormattedTimeSpan } from 'utils';
 import './stock-correlation.scss';
-import { keyCodesForAdd } from 'utils'
 
 const IntervalTitle = ({ theme, ...props }) => {
   return (<div className='intervalLink'>
@@ -74,7 +74,7 @@ export const StockCorrelationInput = props => (
       className='btn btn-default'
       onClick={() => props.makeCalc(
         {
-          timeSpan: getFormattedTimeSpan(props.timeSpan),
+          timeSpan: props.timeSpan,
           interval: props.interval,
         },
         ...props.taggedStocks,
@@ -88,7 +88,6 @@ export const StockCorrelationInput = props => (
 );
 
 StockCorrelationInput.propTypes = {
-  keyCodesForAdd: PropTypes.arrayOf(PropTypes.number),
   taggedStocks: PropTypes.arrayOf(PropTypes.string).isRequired,
   datePicker: PropTypes.shape({
     min: PropTypes.instanceOf(Date).isRequired,

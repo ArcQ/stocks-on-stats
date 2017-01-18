@@ -1,3 +1,5 @@
+import { getDefaultTimeSpan, getFormattedTimeSpan } from 'utils';
+
 const YAHOO_URL = 'http://query.yahooapis.com/v1/public/yql';
 const suffixes = {
   DIAGNOSTICS: 'format=json&diagnostics=true&env=http://datatables.org/alltables.env',
@@ -12,6 +14,15 @@ function _buildUrl(...strs) {
   return `${YAHOO_URL}?q=${newQueryStr}`;
 }
 
+function _getTimeSpan(additionalAttrs) {
+  // not guaranteed additionalAttrs has timespan
+  const timeSpan = (additionalAttrs && additionalAttrs.timeSpan)
+    ? additionalAttrs.timeSpan
+    : getDefaultTimeSpan();
+
+  return getFormattedTimeSpan(timeSpan);
+}
+
 export default {
   build: {
     diagnosticsUrl: (stockSymbols) => {
@@ -20,7 +31,7 @@ export default {
       return _buildUrl(queryStr, suffixes.DIAGNOSTICS);
     },
     historicalUrl: (additionalAttrs, stockSymbol) => {
-      const { startDate, endDate } = additionalAttrs.timeSpan;
+      const { startDate, endDate } = _getTimeSpan(additionalAttrs);
       const queryStr = `select * from yahoo.finance.historicaldata where \
       symbol = "${stockSymbol}" and startDate = "${startDate}" and endDate = "${endDate}"`;
       return _buildUrl(queryStr, suffixes.QUERY_ENV, suffixes.FORMAT_CB);
