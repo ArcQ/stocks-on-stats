@@ -20,9 +20,6 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Selectors
 // ------------------------------------
-function _deepClone(obj) {
-  return JSON.parse(JSON.stringify(obj));
-}
 
 // sample input structure: {"symbol": ["g", "stx"], "results": [[1.0, 0.25], [0.26, 1.0]]}
 /* sample output structure: {
@@ -33,38 +30,23 @@ function _deepClone(obj) {
 
 export const isCalcResult = calcSelectors.isCalcResult;
 
-export function getFormattedData(state) {
-  if (!isCalcResult(state)) return null;
-  const unformattedData = _deepClone(calcSelectors.getCalcResult(state))[0];
-  const formattedData = {
-    symbolModel: {
-      '': { type: String },
-    },
-  };
+export const getPercentageSuccess = function (state) {
+  return (calcSelectors.getCalcResult(state) * 100).toFixed(0);
+};
 
-  unformattedData.symbol.forEach((ele) => {
-    formattedData.symbolModel[ele] = { type: String };
-  });
-
-  // before formattedData.correlations = [[1.0, 0.25], [0.26, 1.0]]
-  formattedData.correlations = unformattedData.results.slice(0);
-
-  // after formattedData.correlations = [{"":"g", g:1.0, stx:0.25}, ["":"stx", g:0.26, stx:1.0]]
-  // corrArr = [1.0,0.3];
-  formattedData.correlations = formattedData.correlations.map((corrArr, i) => {
-    const newEle = { '': unformattedData.symbol[i] };
-    // corr = 1.0;
-    corrArr.forEach((corr, j) => {
-      newEle[unformattedData.symbol[j]] = (corr < 1) ? `${(corr * 100).toFixed(2)}%` : 1;
-    });
-    return newEle;
-  });
-
-  return formattedData;
+function getCalcPercentColor(state) {
+  const percentageSuccess = parseInt(getPercentageSuccess(state), 10);
+  if (percentageSuccess > 80) {
+    return 'colorGood';
+  } else if (percentageSuccess > 50) {
+    return 'colorMed';
+  }
+  return 'colorBad';
 }
 
 export const selectors = {
-  getFormattedData,
+  getPercentageSuccess,
+  getCalcPercentColor,
   isCalcResult,
 };
 
