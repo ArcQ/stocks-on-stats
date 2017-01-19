@@ -31,13 +31,14 @@ class LimitOrderSuccessContainer extends React.Component {
       this.setState({ [key]: value });
     } else {
       const parsedValue = parseInt(value, 10);
-      if (parsedValue != NaN) {
+      // if parsedValue is not empty string but has a non numerical number
+      if (parsedValue && isNaN(parsedValue)) {
+        // TODO add error case (what if not number?)
+      } else {
         const newPrices = update(this.state.prices, {
           [key]: { $set: parsedValue },
         });
         this.setState({ prices: newPrices });
-      } else {
-        //TODO add error case (what if not number?)
       }
     }
   }
@@ -64,7 +65,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   isCalcResult: selectors.isCalcResult(state),
-  calcResult: selectors.getFormattedData(state),
+  percentageSuccess: selectors.getPercentageSuccess(state),
+  percentColor: selectors.getCalcPercentColor(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LimitOrderSuccessContainer);

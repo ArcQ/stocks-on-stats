@@ -30,3 +30,26 @@
     font-style: italic;
   }
 }
+
+.limitOrderCalc{
+  font-size:18px;
+
+  .percentSuccess {
+    font-size:30px;
+    padding-left:7px;
+    padding-right:7px;
+  }
+
+  .colorGood {
+    color:green;
+  }
+
+  .colorMed {
+    color:orange;
+  }
+
+  .colorBad {
+    color:red;
+  }
+}
+
