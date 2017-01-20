@@ -3,11 +3,16 @@ import { Button, section, DatePicker } from 'react-toolbox';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import './risk-of-ruin.scss';
+import VarNumFields from 'components/var-num-fields';
 
 // TODO when user goes beyond 1 year on date picker, show dialog alerting user of limitation
 
 export const RiskOfRuinInput = props => (
   <div>
+    <VarNumFields>
+      <div name="testName1">test1</div>
+      <div name="testName2">test2</div>
+    </VarNumFields>
     <TagsInput
       value={props.taggedStocks}
       addKeys={props.keyCodesForAdd}

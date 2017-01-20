@@ -16,7 +16,7 @@ const IdleAnimation = () => (
 
 export const RiskOfRuin = props => (
   <div>
-    <h2>Correlation Matrix</h2>
+    <h2>Risk of Ruin</h2>
     <Row className='calcRow' >
       <Col xs={12} md={7}>
         <h4 className='calcSubtitle'>Input</h4>
