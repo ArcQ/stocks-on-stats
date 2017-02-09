@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
+import { Card, CardTitle, CardText } from 'react-toolbox';
 import Calc from './risk-of-ruin-calc';
 import Input from './risk-of-ruin-input';
-import { Card, CardTitle, CardText } from 'react-toolbox';
 import './risk-of-ruin.scss';
 import IdleSvg from './infinity.svg';
 

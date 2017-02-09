@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import locationReducer from './location';
 import { calcEpic, calcReducer, CALC_REQUEST } from './calc';
-import { reducer as reduxVariableFormFieldsReducer } from 'redux-variable-form-fields';
+import variableFormFieldsReducer from './variable-form-fields';
 
 // ------------------------------------
 // Root Epic
@@ -23,7 +23,7 @@ export const makeRootReducer = asyncReducers =>
   combineReducers({
     location: locationReducer,
     calc: calcReducer,
-    reduxVariableFormFields: reduxVariableFormFieldsReducer,
+    variableFormFields: variableFormFieldsReducer,
     ...asyncReducers,
   });
 

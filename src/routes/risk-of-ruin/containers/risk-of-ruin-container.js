@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { makeCalc } from 'store/modules/calc/';
 import update from 'immutability-helper';
+import { actions as formActions , selectors as formSelectors } from 'store/modules/variable-form-fields';
 
 import { selectors } from '../modules/risk-of-ruin';
 
@@ -34,7 +35,6 @@ function bindFuncsToSelf(...funcNameArr) {
   });
 }
 
-
 class RiskOfRuinContainer extends React.Component {
   constructor() {
     super();
@@ -55,6 +55,7 @@ class RiskOfRuinContainer extends React.Component {
 
     this.handleStartDateInput = this.handleDateInput.bind(this, START_DATE_KEY);
     this.handleEndDateInput = this.handleDateInput.bind(this, END_DATE_KEY);
+    this.formKey = 'VariableFormFields';
   }
   getFormattedInterval() {
     return update(this.state.interval, {
@@ -83,6 +84,8 @@ class RiskOfRuinContainer extends React.Component {
           handleEndDateInput: this.handleEndDateInput,
           makeRiskOfRuinCalc: this.makeRiskOfRuinCalc,
           getFormattedInterval: this.getFormattedInterval,
+          formKey: this.formKey,
+          onFieldsChange: this.props.modifyVarFields,
         })
         }
       </div>);
@@ -91,11 +94,17 @@ class RiskOfRuinContainer extends React.Component {
 
 const mapDispatchToProps = {
   makeCalc,
+  modifyVarFields: formActions.modifyVarFields,
 };
 
 const mapStateToProps = state => ({
+  formData: formSelectors.getFormData(state),
   isCalcResult: selectors.isCalcResult(state),
   calcResult: selectors.getFormattedData(state),
 });
+
+RiskOfRuinContainer.propTypes = {
+  modifyVarFields: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RiskOfRuinContainer);

@@ -2,19 +2,20 @@ import React, { PropTypes } from 'react';
 import { Button, section, DatePicker } from 'react-toolbox';
 import 'react-tagsinput/react-tagsinput.css';
 // import ReduxVariableFormFields from 'components/var-num-fields';
-import ReduxVariableFormFields, { VarRow, VarLast } from 'redux-variable-form-fields';
+import VariableFormFields, { VarRows, VarLast } from 'variable-form-fields';
 import Input from 'react-toolbox/lib/input';
 import './risk-of-ruin.scss';
 
 const { Row, Col } = require('react-flexbox-grid');
 
-// TODO when user goes beyond 1 year on date picker, show dialog alerting user of limitation
-
 export const RiskOfRuinInput = props => (
   <div>
     <h6>Your Portfolio</h6>
-    <ReduxVariableFormFields formKey='testForm'>
-      <VarRow>
+    <VariableFormFields
+      onChange={newFormData => props.onFieldsChange(newFormData)}
+      data={props.formData}
+    >
+      <VarRows name='portfolio-row' transitionLeaveTimeout={200}>
         <Row>
           <Col xs={5} md={5}>
             <Input label='stock' key='stock' varInput type='text' />
@@ -26,11 +27,11 @@ export const RiskOfRuinInput = props => (
             <Button varRemove icon='remove' floating accent mini />
           </Col>
         </Row>
-      </VarRow>
+      </VarRows>
       <VarLast>
         <Button varAdd icon='add' label='Add Row' flat primary />
       </VarLast>
-    </ReduxVariableFormFields>
+    </VariableFormFields>
     <section>
       <DatePicker
         label='Start Date'
@@ -61,7 +62,6 @@ export const RiskOfRuinInput = props => (
 );
 
 RiskOfRuinInput.propTypes = {
-  keyCodesForAdd: PropTypes.arrayOf(PropTypes.number),
   taggedStocks: PropTypes.arrayOf(PropTypes.string).isRequired,
   interval: PropTypes.shape({
     startDate: PropTypes.instanceOf(Date).isRequired,
@@ -71,9 +71,10 @@ RiskOfRuinInput.propTypes = {
   }).isRequired,
   handleStartDateInput: PropTypes.func.isRequired,
   handleEndDateInput: PropTypes.func.isRequired,
-  handleTagInput: PropTypes.func.isRequired,
   makeCalc: PropTypes.func.isRequired,
   getFormattedInterval: PropTypes.func.isRequired,
+  formData: PropTypes.shape({}).isRequired,
+  onFieldsChange: PropTypes.func.isRequired,
 };
 
 export default RiskOfRuinInput;
