@@ -1,4 +1,5 @@
 import { selectors as calcSelectors } from 'store/modules/calc';
+import { deepClone } from 'utils';
 
 // ------------------------------------
 // Constants
@@ -20,10 +21,6 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Selectors
 // ------------------------------------
-function _deepClone(obj) {
-  return JSON.parse(JSON.stringify(obj));
-}
-
 // sample input structure: {"symbol": ["g", "stx"], "results": [[1.0, 0.25], [0.26, 1.0]]}
 /* sample output structure: {
   symbolModel: {"":{type:String}, "g":{type:String}, "stx":{type:String}},
@@ -35,7 +32,7 @@ export const isCalcResult = calcSelectors.isCalcResult;
 
 export function getFormattedData(state) {
   if (!isCalcResult(state)) return null;
-  const unformattedData = _deepClone(calcSelectors.getCalcResult(state))[0];
+  const unformattedData = deepClone(calcSelectors.getCalcResult(state))[0];
   const formattedData = {
     symbolModel: {
       '': { type: String },
