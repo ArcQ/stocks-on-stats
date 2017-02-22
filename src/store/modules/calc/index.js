@@ -1,7 +1,5 @@
 import { createSelector } from 'reselect';
 import YqlFacade from './utils/yql/yql-facade';
-import { Observable } from 'rxjs/Observable';
-import { Scheduler } from 'rxjs/Scheduler';
 
 const uuid = require('node-uuid');
 // ------------------------------------
