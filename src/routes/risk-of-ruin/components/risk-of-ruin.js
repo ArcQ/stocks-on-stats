@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import Calc from './risk-of-ruin-calc';
 import Input from './risk-of-ruin-input';
-import {Card, CardTitle, CardMedia, CardText, CardActions, Button} from 'react-toolbox';
-import './risk-of-ruin.scss'
+import { Card, CardTitle, CardText } from 'react-toolbox';
+import './risk-of-ruin.scss';
 import IdleSvg from './infinity.svg';
 
-const {Grid, Row, Col} = require('react-flexbox-grid');
+const { Row, Col } = require('react-flexbox-grid');
 
 const IdleAnimation = () => (
   <center className={'idleAnimation'}>

@@ -10,12 +10,17 @@ export const keyCodesForAdd = [TAB_KEY_CODE, RETURN_KEY_CODE, SEMI_COLON_KEY_COD
 
 // takes variable arguments: 1(date) or 3(year,month,day)
 export function getFormattedDateStr(...args) {
-  const get2DigitNum = (num) => (num<10) ? `0${num}` : num;
+  const get2DigitNum = num => ((num < 10) ? `0${num}` : num);
 
   const concatDateStr = (year, month, day) => `${year}-${month}-${day}`;
   return (args.length > 1)
     ? concatDateStr(...args)
-    : concatDateStr(get2DigitNum(args[0]).getFullYear(), get2DigitNum(args[0]).getMonth() + 1, get2DigitNum(args[0].getDate()));
+    : concatDateStr(
+      get2DigitNum(
+        args[0]).getFullYear(),
+      get2DigitNum(args[0]).getMonth() + 1,
+      get2DigitNum(args[0].getDate()),
+    );
 }
 
 export function getDateBackByMonths(month = 0) {

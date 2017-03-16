@@ -29,6 +29,10 @@ class StockCorrelationContainer extends React.Component {
       },
       interval: '1',
     };
+    this.handleTagInput = this.handleGenericInput.bind(this, TAG_INPUT_KEY);
+    this.handleIntervalInput = this.handleGenericInput.bind(this, INTERVAL_INPUT_KEY);
+    this.handleStartDateInput = this.handleDateInput.bind(this, START_DATE_KEY);
+    this.handleEndDateInput = this.handleDateInput.bind(this, END_DATE_KEY);
   }
   handleDateInput(key, date) {
     const newTimespan = update(this.state.timeSpan, {
@@ -45,10 +49,10 @@ class StockCorrelationContainer extends React.Component {
         { StockCorrelation({
           ...this.props,
           ...this.state,
-          handleTagInput: this.handleGenericInput.bind(this, TAG_INPUT_KEY),
-          handleIntervalInput: this.handleGenericInput.bind(this, INTERVAL_INPUT_KEY),
-          handleStartDateInput: this.handleDateInput.bind(this, START_DATE_KEY),
-          handleEndDateInput: this.handleDateInput.bind(this, END_DATE_KEY),
+          handleTagInput: this.handleTagInput,
+          handleIntervalInput: this.handleIntervalInput,
+          handleStartDateInput: this.handleStartDateInput,
+          handleEndDateInput: this.handleEndDateInput,
           makeStockCorrelationCalc: this.makeStockCorrelationCalc,
         })}
       </div>);

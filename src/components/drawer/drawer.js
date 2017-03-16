@@ -15,7 +15,7 @@ function getNavListItems(routesArr, router) {
   return listItems.map((routeStr, i) => (
     <ListItem
       key={i}
-      onClick={() => router.push({ pathname:routeStr })}
+      onClick={() => router.push({ pathname: routeStr })}
       caption={formatCaption(routeStr)}
     />
   ));

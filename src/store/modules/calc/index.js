@@ -33,7 +33,6 @@ export function finishCalcSuccess(calcType, response) {
 
 // TODO add error scenario
 export function finishCalcErr(err = 'an error occurred') {
-  console.log(err);
   return {
     type: CALC_REQUEST_ERR,
     errorCode: err,

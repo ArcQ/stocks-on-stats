@@ -5,8 +5,6 @@ import 'styles/twoDimensionDataTable.scss';
 export const StockCorrelationCalc = props => (
   <div>
     <div>
-    </div>
-    <div>
       <Table
         className={'twoDimensionDataTable'}
         model={props.calcResult.symbolModel}
