@@ -3,7 +3,7 @@ import { Button, section, Input } from 'react-toolbox';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import './limit-order-success.scss';
-import { keyCodesForAdd } from 'utils'
+import { keyCodesForAdd } from 'utils';
 
 // TODO when user goes beyond 1 year on date picker, show dialog alerting user of limitation
 

@@ -2,7 +2,7 @@ import locationReducer, {
   LOCATION_CHANGE,
   locationChange,
   updateLocation,
-} from 'store/location'
+} from 'store/location';
 
 describe('(Internal Module) Location', () => {
   it('Should export a constant LOCATION_CHANGE.', () => {

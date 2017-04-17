@@ -23,7 +23,7 @@ export const RiskOfRuin = props => (
         { Input(props) }
         <h4 className='calcSubtitle'>Results</h4>
         { (!props.isCalcResult) && <IdleAnimation /> }
-        { (props.isCalcResult) && Calc(props) }
+        { (!props.isCalcResult) && Calc(props) }
       </Col>
       <Col xs={12} md={5}>
         <Card style={{ width: '100%' }}>

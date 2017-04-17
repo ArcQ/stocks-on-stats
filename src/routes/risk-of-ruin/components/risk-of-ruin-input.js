@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Button, section, DatePicker } from 'react-toolbox';
+import { Button, section, DatePicker, Slider } from 'react-toolbox';
 import 'react-tagsinput/react-tagsinput.css';
-// import ReduxVariableFormFields from 'components/var-num-fields';
 import VariableFormFields, { VarRows, VarLast } from 'variable-form-fields';
 import Input from 'react-toolbox/lib/input';
 import './risk-of-ruin.scss';
@@ -33,26 +32,18 @@ export const RiskOfRuinInput = props => (
       </VarLast>
     </VariableFormFields>
     <section>
-      <DatePicker
-        label='Start Date'
-        onChange={props.handleStartDateInput}
-        value={props.interval.startDate}
-        minDate={props.interval.min}
-        maxDate={props.interval.max}
-        sundayFirstDayOfWeek
-      />
-      <DatePicker
-        label='End Date'
-        onChange={props.handleEndDateInput}
-        value={props.interval.endDate}
-        minDate={props.interval.min}
-        maxDate={props.interval.max}
-        sundayFirstDayOfWeek
+      <p>Ruin (% of Portfolio Worth in Losses)</p>
+      <Slider
+        min={0}
+        max={10}
+        editable
+        value={props.ruinPercentage}
+        onChange={(evt) => props.setRuinPercent(evt)}
       />
     </section>
     <Button
       className='btn btn-default'
-      onClick={() => props.makeCalc(props.getFormattedInterval(), ...props.taggedStocks)}
+      onClick={() => props.makeCalc()}
       raised
       primary
     >
@@ -62,19 +53,11 @@ export const RiskOfRuinInput = props => (
 );
 
 RiskOfRuinInput.propTypes = {
-  taggedStocks: PropTypes.arrayOf(PropTypes.string).isRequired,
-  interval: PropTypes.shape({
-    startDate: PropTypes.instanceOf(Date).isRequired,
-    endDate: PropTypes.instanceOf(Date).isRequired,
-    min: PropTypes.instanceOf(Date).isRequired,
-    max: PropTypes.instanceOf(Date).isRequired,
-  }).isRequired,
-  handleStartDateInput: PropTypes.func.isRequired,
-  handleEndDateInput: PropTypes.func.isRequired,
   makeCalc: PropTypes.func.isRequired,
-  getFormattedInterval: PropTypes.func.isRequired,
   formData: PropTypes.shape({}).isRequired,
   onFieldsChange: PropTypes.func.isRequired,
+  ruinPercentage: PropTypes.number.isRequired,
+  setRuinPercent: PropTypes.func.isRequired,
 };
 
 export default RiskOfRuinInput;

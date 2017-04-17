@@ -1,21 +1,35 @@
 import { selectors as calcSelectors } from 'store/modules/calc';
 import { deepClone } from 'utils';
+import { update } from 'immutability-helper';
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const TAGS_INPUT_CHANGE = 'TAGS_INPUT_CHANGE';
+export const RUIN_PERCENT_CHANGE = 'RUIN_PERCENT_CHANGE';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
+export function setRuinPercent(percent) {
+  console.log(percent);
+  return {
+    type: RUIN_PERCENT_CHANGE,
+    payload: percent,
+  };
+}
+
 export const actions = {
+  setRuinPercent,
 };
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+  [RUIN_PERCENT_CHANGE]: (state, action) => update(state, {
+    ruinPercent: { $set: action.payload },
+  })
 };
 
 // ------------------------------------
@@ -61,15 +75,21 @@ export function getFormattedData(state) {
   return formattedData;
 }
 
+export function getRuinPercent(state) {
+  return state.ruinPercent;
+}
+
 export const selectors = {
   getFormattedData,
   isCalcResult,
+  getRuinPercent,
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {
+  getRiskPercentage: 40,
 };
 export default function counterReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];

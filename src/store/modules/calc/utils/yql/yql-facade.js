@@ -25,7 +25,5 @@ export default{
   {param 1}: takes location to see which calculator methods to use
   {param 2+}: rest of parameters should match the method it is calling eg. getStockCorrelation
   */
-  makeCalculation: (location, args) => {
-    return getHistoricalThenReqCalc(location, ...args)
-  }
+  makeCalculation: (location, args) => getHistoricalThenReqCalc(location, ...args),
 };

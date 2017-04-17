@@ -15,16 +15,14 @@ import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import './stock-correlation.scss';
 
-const IntervalTitle = ({ theme, ...props }) => {
-  return (<div className='intervalLink'>
-    <h4>Interval</h4>
-    <Link {...props}>
-      <div>
-        <FontIcon {...props} value='help_outline' />
-      </div>
-    </Link>
-  </div>);
-};
+const IntervalTitle = ({ theme, ...props }) => (<div className='intervalLink'>
+  <h4>Interval</h4>
+  <Link {...props}>
+    <div>
+      <FontIcon {...props} value='help_outline' />
+    </div>
+  </Link>
+</div>);
 
 const ToolTipIcon = Tooltip(IntervalTitle);
 

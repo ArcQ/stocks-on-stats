@@ -37,6 +37,7 @@ webpackConfig.entry = {
 }
 
 webpackConfig.entry.app.unshift('whatwg-fetch');
+console.log(webpackConfig.entry);
 
 // ------------------------------------
 // Bundle Output

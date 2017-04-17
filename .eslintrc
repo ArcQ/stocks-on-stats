@@ -1,12 +1,14 @@
 {
   "parser": "babel-eslint",
     "extends": [
-      "airbnb"
+      "airbnb",
+      "plugin:lodash/recommended"
     ],
     "plugins": [
       "babel",
-    "react",
-    "promise"
+      "lodash",
+      "react",
+      "promise"
     ],
     "env": {
       "browser" : true
@@ -34,6 +36,7 @@
       "no-mixed-operators": 1,
       "no-underscore-dangle": 0,
       "import/no-unresolved": [2,{"ignore":[ 'rxjs']}],
-      "func-names":0
+      "func-names":0,
+      "lodash/prefer-lodash-method": 0,
     },
 }
