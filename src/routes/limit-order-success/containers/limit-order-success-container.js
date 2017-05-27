@@ -26,13 +26,13 @@ class LimitOrderSuccessContainer extends React.Component {
     this.handleLimitPriceInput = this.handleGenericInput.bind(this, LIMIT_PRICE_KEY);
   }
   // TODO seperate genericInput into 2 functions afterall
-  handleGenericInput(key, value) {
+  handleGenericInput(key, val) {
     if (key === TAG_INPUT_KEY) {
-      this.setState({ [key]: value });
+      this.setState({ [key]: val});
     } else {
-      const parsedValue = parseInt(value, 10);
+      const parsedValue = (val=== '') ? 0 : parseInt(val, 10);
       // if parsedValue is not empty string but has a non numerical number
-      if (parsedValue && isNaN(parsedValue)) {
+      if (isNaN(parsedValue)) {
         // TODO add error case (what if not number?)
       } else {
         const newPrices = update(this.state.prices, {

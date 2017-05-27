@@ -9,6 +9,7 @@ export const MODIFY_VAR_FIELDS = 'MODIFY_VAR_FIELDS';
 // Actions
 // ------------------------------------
 export function modifyVarFields(formData) {
+  console.log(formData);
   return {
     type: MODIFY_VAR_FIELDS,
     formData,

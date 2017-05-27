@@ -1,5 +1,5 @@
 @import 'base';
-@import '~normalize.css/normalize';
+@import '../../node_modules/normalize.css/normalize';
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -10,6 +10,7 @@ html {
 html,
 body {
   padding: 0;
+  margin: 0;
   height: 100%;
   font-family: 'Roboto';
 }

@@ -78,7 +78,7 @@ export const RiskOfRuinCalc = props => (
         width={100}
         height={500}
         options={{
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
         }}
       />
     </div>

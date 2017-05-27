@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import update from 'immutability-helper';
 
 import { makeCalc } from 'store/modules/calc/';
 import {
@@ -9,12 +8,6 @@ import {
 } from 'store/modules/variable-form-fields';
 import { selectors, actions } from '../modules/risk-of-ruin';
 import RiskOfRuin from '../components/risk-of-ruin';
-
-function bindFuncsToSelf(...funcNameArr) {
-  funcNameArr.forEach((funcName) => {
-    this[funcName] = this[funcName].bind(this);
-  });
-}
 
 class RiskOfRuinContainer extends React.Component {
   constructor() {

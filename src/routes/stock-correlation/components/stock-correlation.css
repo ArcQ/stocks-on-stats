@@ -1,0 +1,17 @@
+.date-inputs > div > div > div {
+  width: 100% !important; }
+
+.frequency-inputs {
+  padding-bottom: 20px; }
+  .frequency-inputs h4 {
+    margin-bottom: 16px; }
+  .frequency-inputs > div > div {
+    margin-bottom: 5px; }
+  .frequency-inputs .frequency-tool-tip {
+    height: 20px !important;
+    width: 20px !important; }
+  .frequency-inputs input {
+    margin-bottom: 10px !important; }
+
+.two-dimension-data-table {
+  margin-bottom: 20px !important; }

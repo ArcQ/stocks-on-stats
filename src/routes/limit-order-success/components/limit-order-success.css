@@ -1,0 +1,28 @@
+.price-inputs {
+  padding-bottom: 20px; }
+  .price-inputs > div > div {
+    width: 100% !important; }
+
+.calcSubtitle {
+  margin-top: 20px; }
+
+.idleAnimation {
+  padding-top: 20px;
+  min-height: 200px; }
+  .idleAnimation p {
+    color: #999;
+    text-align: center;
+    font-style: italic; }
+
+.limitOrderCalc {
+  font-size: 18px; }
+  .limitOrderCalc .percentSuccess {
+    font-size: 30px;
+    padding-left: 7px;
+    padding-right: 7px; }
+  .limitOrderCalc .colorGood {
+    color: green; }
+  .limitOrderCalc .colorMed {
+    color: orange; }
+  .limitOrderCalc .colorBad {
+    color: red; }

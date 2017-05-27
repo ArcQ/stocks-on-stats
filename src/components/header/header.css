@@ -1,0 +1,15 @@
+.routeActive {
+  font-weight: bold; }
+
+.brand-header {
+  vertical-align: middle;
+  z-index: 100; }
+  .brand-header * {
+    vertical-align: middle; }
+  .brand-header .logo {
+    height: 30px;
+    margin-right: 10px; }
+
+.app-bar {
+  z-index: 1400 !important;
+  position: fixed !important; }

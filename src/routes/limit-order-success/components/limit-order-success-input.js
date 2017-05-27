@@ -1,53 +1,56 @@
 import React, { PropTypes } from 'react';
-import { Button, section, Input } from 'react-toolbox';
-import TagsInput from 'react-tagsinput';
-import 'react-tagsinput/react-tagsinput.css';
-import './limit-order-success.scss';
-import { keyCodesForAdd } from 'utils';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import StockTagsInput from 'shared/components/stock-tags-input/stock-tags-input';
+import { Row, Col } from 'react-flexbox-grid';
+import './limit-order-success.css';
 
 // TODO when user goes beyond 1 year on date picker, show dialog alerting user of limitation
 
+function formatIfZero(val) {
+  return (val === 0) ? '' : val;
+}
+
 export const LimitOrderSuccessInput = props => (
   <div>
-    <TagsInput
+    <StockTagsInput
       value={props.taggedStocks}
-      addKeys={keyCodesForAdd}
       onChange={props.handleTagInput}
-      inputProps={{
-        className: 'react-tagsinput-input',
-        placeholder: 'eg. GOOG;AAPL;AMZN;',
-      }}
-      onlyUnique
+      placeholder='eg. GOOG;'
+      maxOne
     />
-    <section>
-      <Input
-        type='text'
-        label='Current Price (USD)'
-        name='Current Price'
-        onChange={props.handleCurrentPriceInput}
-        value={props.prices.current}
-      />
-      <Input
-        type='text'
-        label='Limit Price (USD)'
-        name='Limit Price'
-        onChange={props.handleLimitPriceInput}
-        value={props.prices.limit}
-      />
-    </section>
-    <Button
+    <Row className='price-inputs'>
+      <Col xs={6} md={6}>
+        <TextField
+          type='text'
+          floatingLabelText='Current Price (USD)'
+          hintText='Current Stock Price'
+          onChange={(evt, val) => props.handleCurrentPriceInput(val)}
+          value={formatIfZero(props.prices.current)}
+        />
+      </Col>
+      <Col xs={6} md={6}>
+        <TextField
+          type='text'
+          floatingLabelText='Limit Price (USD)'
+          hintText='Desired Limit Price'
+          onChange={(evt, val) => props.handleLimitPriceInput(val)}
+          value={formatIfZero(props.prices.limit)}
+        />
+      </Col>
+    </Row>
+    <RaisedButton
       className='btn btn-default'
-      onClick={() => props.makeCalc(
+      onTouchTap={() => props.makeCalc(
         {
           prices: props.prices,
         },
         ...props.taggedStocks,
       )}
-      raised
       primary
     >
       Calculate
-    </Button>
+    </RaisedButton>
   </div>
 );
 

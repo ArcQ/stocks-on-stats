@@ -1,87 +1,78 @@
 import React, { PropTypes } from 'react';
-import {
-  Button,
-  section,
-  DatePicker,
-  RadioGroup,
-  RadioButton,
-  FontIcon,
-  Link,
-  Tooltip,
-} from 'react-toolbox';
+import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import IconButton from 'material-ui/IconButton';
+import HelpOutline from 'material-ui/svg-icons/action/help-outline';
 
-import { keyCodesForAdd } from 'utils';
-import TagsInput from 'react-tagsinput';
-import 'react-tagsinput/react-tagsinput.css';
+import { Row, Col } from 'react-flexbox-grid';
+import StockTagsInput from 'shared/components/stock-tags-input/stock-tags-input';
 import './stock-correlation.scss';
-
-const IntervalTitle = ({ theme, ...props }) => (<div className='intervalLink'>
-  <h4>Interval</h4>
-  <Link {...props}>
-    <div>
-      <FontIcon {...props} value='help_outline' />
-    </div>
-  </Link>
-</div>);
-
-const ToolTipIcon = Tooltip(IntervalTitle);
 
 // TODO when user goes beyond 1 year on date picker, show dialog alerting user of limitation
 
 export const StockCorrelationInput = props => (
   <div>
-    <TagsInput
+    <StockTagsInput
       value={props.taggedStocks}
-      addKeys={keyCodesForAdd}
       onChange={props.handleTagInput}
-      inputProps={{
-        className: 'react-tagsinput-input',
-        placeholder: 'eg. GOOG;AAPL;AMZN;',
-      }}
-      onlyUnique
+      placeholder='eg. GOOG;AAPL;AMZN;'
     />
-    <section>
-      <DatePicker
-        label='Start Date'
-        onChange={props.handleStartDateInput}
-        value={props.timeSpan.startDate}
-        minDate={props.datePicker.min}
-        maxDate={props.datePicker.max}
-        sundayFirstDayOfWeek
-      />
-      <DatePicker
-        label='End Date'
-        onChange={props.handleEndDateInput}
-        value={props.timeSpan.endDate}
-        minDate={props.datePicker.min}
-        maxDate={props.datePicker.max}
-        sundayFirstDayOfWeek
-      />
-      <ToolTipIcon
-        tooltip='The higher this value, the less it will be affected by short term volatility.'
-        tooltipPosition='right'
-        tooltipHideOnClick={false}
-      />
-      <RadioGroup name='comic' value={props.interval} onChange={props.handleIntervalInput}>
+    <Row className='date-inputs'>
+      <Col xs={6} md={6}>
+        <DatePicker
+          className='date-input'
+          hintText=''
+          floatingLabelText='Start Date'
+          minDate={props.datePicker.min}
+          maxDate={props.datePicker.max}
+          onChange={(evt, date) => props.handleStartDateInput(date)}
+        />
+      </Col>
+      <Col xs={6} md={6}>
+        <DatePicker
+          hintText=''
+          floatingLabelText='End Date'
+          minDate={props.datePicker.min}
+          maxDate={props.datePicker.max}
+          onChange={(evt, date) => props.handleEndDateInput(date)}
+        />
+      </Col>
+    </Row>
+    <div className='frequency-inputs'>
+      <h4> Calculation Frequency
+        <IconButton
+          tooltip='The higher this value, the less it will be affected by short term volatility.'
+          tooltipPosition='top-right'
+        >
+          <HelpOutline
+            className='frequency-tool-tip'
+          />
+        </IconButton>
+      </h4>
+      <RadioButtonGroup
+        name='correlationGroup'
+        value={props.interval}
+        onChange={(evt, val) => props.handleIntervalInput(val)}
+      >
         <RadioButton label='Daily' value='1' />
         <RadioButton label='Weekly' value='7' />
         <RadioButton label='Monthly' value='30' />
-      </RadioGroup>
-    </section>
-    <Button
+      </RadioButtonGroup>
+    </div>
+    <RaisedButton
       className='btn btn-default'
-      onClick={() => props.makeCalc(
+      onTouchTap={() => props.makeCalc(
         {
           timeSpan: props.timeSpan,
           interval: props.interval,
         },
         ...props.taggedStocks,
       )}
-      raised
       primary
     >
       Calculate
-    </Button>
+    </RaisedButton>
   </div>
 );
 

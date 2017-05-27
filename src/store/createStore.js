@@ -3,6 +3,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import { browserHistory } from 'react-router';
 import { makeRootReducer, rootEpic } from './modules/root';
 import { updateLocation, redirectToCalcResults } from './modules/location';
+import persistState from 'redux-localstorage';
 
 export default (initialState = {}) => {
   // ======================================================
@@ -16,8 +17,7 @@ export default (initialState = {}) => {
   const enhancers = [];
 
   let composeEnhancers = compose;
-
-  if (__DEV__) {
+  if (process.env.NODE_ENV === 'development') {
     const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     if (typeof composeWithDevToolsExtension === 'function') {
       composeEnhancers = composeWithDevToolsExtension;
@@ -33,6 +33,7 @@ export default (initialState = {}) => {
     composeEnhancers(
       applyMiddleware(epicMiddleware),
       ...enhancers,
+      persistState('calc'),
     ),
   );
   store.asyncReducers = {};

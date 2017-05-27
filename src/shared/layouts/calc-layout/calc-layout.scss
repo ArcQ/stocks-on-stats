@@ -1,0 +1,40 @@
+.calc-result {
+  padding-bottom: 200px; 
+}
+
+#calc-result-anchor {
+  text-decoration: none;
+  color: black;
+  padding-top:20px;
+  h4 {
+    padding-top: 80px; 
+    margin-top: -80px;
+  }
+}
+
+#calc-result-anchor:hover {
+  cursor: default;
+}
+
+.calc-result-container {
+  padding-top:20px;
+}
+
+.input-container {
+  background-color:#f9f9f9 !important;
+  padding: 20px;
+  padding-top: 60px;
+  position: relative;
+
+  h3 {
+    margin:0;
+    background-color: #dedfe0 !important;
+    padding: 20px;
+    color: #444;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    position: 0 0 auto 0;
+  }
+}

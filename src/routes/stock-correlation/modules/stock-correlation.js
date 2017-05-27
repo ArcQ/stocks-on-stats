@@ -33,32 +33,10 @@ export const isCalcResult = calcSelectors.isCalcResult;
 export function getFormattedData(state) {
   if (!isCalcResult(state)) return null;
   const unformattedData = deepClone(calcSelectors.getCalcResult(state))[0];
-  const formattedData = {
-    symbolModel: {
-      '': { type: String },
-    },
+  return {
+    symbolModel: unformattedData.symbol,
+    correlations: unformattedData.results,
   };
-
-  unformattedData.symbol.forEach((ele) => {
-    formattedData.symbolModel[ele] = { type: String };
-  });
-
-  // before formattedData.correlations = [[1.0, 0.25], [0.26, 1.0]]
-  formattedData.correlations = unformattedData.results.slice(0);
-
-  // after formattedData.correlations = [{"":"g", g:1.0, stx:0.25}, ["":"stx", g:0.26, stx:1.0]]
-  // corrArr = [1.0,0.3];
-  formattedData.correlations = formattedData.correlations.map((corrArr, i) => {
-    const newEle = { '': unformattedData.symbol[i] };
-    // corr = 1.0;
-    corrArr.forEach((corr, j) => {
-      newEle[unformattedData.symbol[j]] = (corr < 1) ? `${(corr * 100).toFixed(2)}%` : 1;
-    });
-
-    return newEle;
-  });
-
-  return formattedData;
 }
 
 export const selectors = {

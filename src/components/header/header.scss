@@ -2,14 +2,21 @@
   font-weight: bold;
 }
 
-.mainAppBar {
-  button {
-    width:4.5rem !important;
-    height:4.5rem !important;
-    margin-right:2px;
+.brand-header {
+  vertical-align: middle;
+  z-index: 100;
+  
+  * {
+    vertical-align: middle;
+  }
+
+  .logo {
+    height: 30px;
+    margin-right: 10px;
   }
 }
 
-.logo {
-  font-size:2.6rem !important;
+.app-bar {
+  z-index: 1400 !important;
+  position: fixed !important;
 }

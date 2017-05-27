@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
-import Table from 'react-toolbox/lib/table';
 import 'styles/twoDimensionDataTable.scss';
+import CalcTable from './calc-table';
 
 export const StockCorrelationCalc = props => (
   <div>
-    <div>
-      <Table
-        className={'twoDimensionDataTable'}
+    <div
+      className='two-dimension-data-table'
+    >
+      <CalcTable
+        data={props.calcResult.correlations}
         model={props.calcResult.symbolModel}
-        source={props.calcResult.correlations}
-        selectable={false}
       />
     </div>
   </div>
@@ -21,7 +21,7 @@ StockCorrelationCalc.propTypes = {
     correlations: PropTypes.arrayOf(
       PropTypes.shape({}),
     ),
-  }),
+  }).isRequired,
 };
 
 export default StockCorrelationCalc;

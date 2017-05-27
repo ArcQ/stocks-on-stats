@@ -1,0 +1,36 @@
+$colorThree: #FF9F1C;
+
+.two-dimension-table {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+
+  tr td:first-child {
+    background-color: $colorThree !important;
+    border-bottom:0px;
+    border-top:0px;
+    border-right: 1px solid rgba(0,0,0,.12);
+    color:#FDFFFC !important;
+  }
+
+  tr {
+    margin-bottom: 20px;
+  }
+
+  tr:hover {
+    background-color: white !important;
+  }
+
+  thead > tr {
+    margin-bottom:0px;
+    th {
+      background-color: $colorThree !important;
+    }
+    th:first-child {
+      border-bottom:0px;
+    }
+
+    th:not(:first-child) {
+      border-bottom: 1px solid rgba(0,0,0,.12);
+      color:#FDFFFC !important;
+    }
+  }
+}

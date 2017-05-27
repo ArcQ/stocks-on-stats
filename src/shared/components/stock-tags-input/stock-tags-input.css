@@ -1,0 +1,26 @@
+.react-tagsinput {
+  border: none;
+  border-bottom: 1px solid #e2e2e2;
+  margin-top: 25px;
+  padding-left: 0px; }
+  .react-tagsinput > span > input {
+    width: 200px;
+    font-family: sans-serif;
+    font-size: 16px; }
+  .react-tagsinput ::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: rgba(0, 0, 0, 0.298039); }
+  .react-tagsinput :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: rgba(0, 0, 0, 0.298039); }
+  .react-tagsinput ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: rgba(0, 0, 0, 0.298039); }
+  .react-tagsinput :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(0, 0, 0, 0.298039); }
+
+.react-tagsinput-tag {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.870588); }

@@ -5,17 +5,25 @@ const uuid = require('node-uuid');
 // ------------------------------------
 // Constants
 // ------------------------------------
-const _STATE_IDLE = 0;
-const _STATE_PROCESSING = 1;
-const _STATE_ERROR = 2;
+export const _STATE_IDLE = 0;
+export const _STATE_PROCESSING = 1;
+export const _STATE_ERROR = 2;
+export const _STATE_REDIRECT = 3;
 
 export const CALC_REQUEST = 'CALC_REQUEST';
 export const NOTIFY_CALC_FINISH = 'NOTIFY_REQUEST_FINISH';
 export const CALC_REQUEST_ERR = 'CALC_REQUEST_ERR';
+export const CALC_RESET = 'CALC_RESET';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
+export function calcReset() {
+  return {
+    type: CALC_RESET,
+  };
+}
+
 export function makeCalc(...args) {
   return {
     type: CALC_REQUEST,
@@ -73,8 +81,15 @@ const ACTION_HANDLERS = {
         calcType: action.calcType,
         data: action.data,
       }],
-      requestState: _STATE_IDLE,
+      requestState: _STATE_REDIRECT,
       requestErrorCode: action.errorCode || null,
+    },
+  ),
+  [CALC_RESET]: state => Object.assign(
+    {},
+    state,
+    {
+      requestState: _STATE_IDLE,
     },
   ),
 };
