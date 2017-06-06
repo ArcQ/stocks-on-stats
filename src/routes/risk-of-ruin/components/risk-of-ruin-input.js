@@ -23,20 +23,24 @@ export const RiskOfRuinInput = props => (
         <Row>
           <Col xs={5} sm={5} md={5}>
             <TextField
+              key='stock'
               className='var-input'
               varInput
               type='text'
               floatingLabelText='Stock Symbol'
               hintText='eg. GOOG'
+              onChange={(evt, val) => val}
             />
           </Col>
           <Col xs={5} sm={5} md={5}>
             <TextField
+              key='shares'
               className='var-input'
               varInput
               type='text'
               floatingLabelText='Shares of Stock'
               hintText='eg. 50'
+              onChange={(evt, val) => val}
             />
           </Col>
           <Col xs={1} sm={5} md={1}>
