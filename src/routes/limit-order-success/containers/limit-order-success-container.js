@@ -28,9 +28,9 @@ class LimitOrderSuccessContainer extends React.Component {
   // TODO seperate genericInput into 2 functions afterall
   handleGenericInput(key, val) {
     if (key === TAG_INPUT_KEY) {
-      this.setState({ [key]: val});
+      this.setState({ [key]: val });
     } else {
-      const parsedValue = (val=== '') ? 0 : parseInt(val, 10);
+      const parsedValue = (val === '') ? 0 : parseInt(val, 10);
       // if parsedValue is not empty string but has a non numerical number
       if (isNaN(parsedValue)) {
         // TODO add error case (what if not number?)

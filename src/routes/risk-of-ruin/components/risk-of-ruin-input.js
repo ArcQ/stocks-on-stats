@@ -74,7 +74,7 @@ export const RiskOfRuinInput = props => (
     </Row>
     <RaisedButton
       className='calculate-btn btn btn-default'
-      onTouchTap={() => props.makeCalc()}
+      onTouchTap={() => props.makeCalc(props.formData, props.ruinPercent)}
       primary
     >
       Calculate

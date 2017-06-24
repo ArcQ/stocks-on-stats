@@ -6255,9 +6255,9 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
-variable-form-fields@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/variable-form-fields/-/variable-form-fields-1.0.3.tgz#d315fd09b79de818e6c12c712a0756cf96191f37"
+variable-form-fields@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/variable-form-fields/-/variable-form-fields-1.0.4.tgz#82824cd5af56fe2287f35b8c5bab4969b7e11e98"
   dependencies:
     immutability-helper "^2.1.1"
     prop-types "^15.5.10"

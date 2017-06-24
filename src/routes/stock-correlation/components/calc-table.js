@@ -13,7 +13,7 @@ function makePercent(num) {
   return `${(num * 100).toFixed(0)}%`;
 }
 
-const CalcTable = function(props) {
+const CalcTable = function (props) {
   return (
     <Table className='two-dimension-table'>
       <TableHeader displaySelectAll={false}>
