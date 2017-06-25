@@ -1,6 +1,4 @@
 import fetch from 'whatwg-fetch';
-// import {flatMap} from 'lodash';
-// let _ = {flatMap};
 
 const YAHOO_URL = 'http://query.yahooapis.com/v1/public/yql';
 const suffixes = {

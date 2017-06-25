@@ -2,7 +2,6 @@ import fetchJsonp from 'fetch-jsonp';
 // import 'whatwg-fetch';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
-import 'rxjs/Rx';
 import 'rxjs/add/observable/dom/ajax';
 
 export default {

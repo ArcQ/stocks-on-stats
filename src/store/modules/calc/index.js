@@ -1,4 +1,8 @@
 import { createSelector } from 'reselect';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/retry';
 import YqlFacade from './utils/yql/yql-facade';
 
 const uuid = require('node-uuid');

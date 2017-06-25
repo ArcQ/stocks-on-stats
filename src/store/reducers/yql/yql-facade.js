@@ -1,4 +1,3 @@
-import RxJs from 'rxjs';
 import YqlRequests from './yql-requests';
 
 export default{
